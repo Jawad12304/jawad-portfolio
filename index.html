@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jawad Hussain Shah | Graphic Designer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#3b82f6',
+                            DEFAULT: '#2563eb',
+                            dark: '#1e40af',
+                            accent: '#fbbf24' // Gold accent
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .portfolio-item {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .hidden-item {
+            display: none;
+        }
+
+        .hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Pinterest Masonry Gallery */
+        .masonry-grid {
+            column-count: 3;
+            column-gap: 16px;
+        }
+
+        @media (max-width: 1024px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .masonry-grid {
+                column-count: 1;
+            }
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .masonry-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .masonry-item img {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+        }
+
+        /* Gallery Modal */
+        .gallery-modal {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+
+        .gallery-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .gallery-modal .modal-content {
+            transform: translateY(30px) scale(0.97);
+            transition: transform 0.35s ease;
+        }
+
+        .gallery-modal.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        /* Category Card */
+        .category-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(37, 99, 235, 0.25);
+        }
+
+        .category-card .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.1) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            transition: background 0.4s ease;
+        }
+
+        .category-card:hover .card-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.2) 100%);
+        }
+
+        .category-card .card-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .category-card:hover .card-img {
+            transform: scale(1.1);
+        }
+
+        .card-cta {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .card-cta {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100 font-sans antialiased">
+
+    <nav class="fixed w-full z-50 bg-gray-900/95 backdrop-blur shadow-lg border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white tracking-wider">JAWAD<span
+                    class="text-brand-accent">.DESIGN</span></a>
+
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="hover:text-brand-accent transition font-medium">Home</a>
+                <a href="#about" class="hover:text-brand-accent transition font-medium">About</a>
+                <a href="#services" class="hover:text-brand-accent transition font-medium">Services</a>
+                <a href="#portfolio" class="hover:text-brand-accent transition font-medium">Portfolio</a>
+                <a href="#contact"
+                    class="px-6 py-2 bg-brand-accent hover:bg-yellow-500 rounded-full text-gray-900 font-bold transition shadow-lg shadow-brand-accent/30">Hire
+                    Me</a>
+            </div>
+
+            <button id="menu-btn" class="md:hidden text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-gray-800 absolute w-full text-center pb-4 border-t border-gray-700">
+            <a href="#home" class="block py-3 hover:text-brand-accent transition">Home</a>
+            <a href="#about" class="block py-3 hover:text-brand-accent transition">About</a>
+            <a href="#services" class="block py-3 hover:text-brand-accent transition">Services</a>
+            <a href="#portfolio" class="block py-3 hover:text-brand-accent transition">Portfolio</a>
+            <a href="#contact" class="block py-3 mx-6 mt-2 bg-brand-accent text-gray-900 font-bold rounded-full">Hire
+                Me</a>
+        </div>
+    </nav>
+
+    <section id="home" class="hero-bg h-screen flex items-center justify-center text-center px-6">
+        <div class="max-w-4xl">
+            <p class="text-brand-accent font-semibold tracking-widest mb-4 animate-pulse">GRAPHIC DESIGNER & WEB
+                DEVELOPER</p>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">I Create Visuals That <br><span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-brand-accent">Tell Your
+                    Story.</span></h1>
+            <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">Expert in Adobe Suite & Canva. Specializing in
+                high-conversion social media assets, print media, and brand identity.</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#portfolio"
+                    class="px-8 py-3 bg-brand-DEFAULT rounded-full font-semibold hover:bg-brand-dark transition transform hover:-translate-y-1 shadow-lg shadow-blue-500/50">View
+                    My Work</a>
+                <a href="#contact"
+                    class="px-8 py-3 border border-white rounded-full font-semibold hover:bg-white hover:text-black transition">Contact
+                    Me</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <img src="images/ME/JD.jpeg" alt="Jawad Hussain Shah"
+                        class="rounded-lg shadow-2xl border-4 border-gray-700 grayscale hover:grayscale-0 transition duration-500">
+                    <div
+                        class="absolute -bottom-6 -right-6 bg-brand-accent text-gray-900 p-6 rounded-lg shadow-xl hidden md:block">
+                        <p class="font-bold text-3xl">2+</p>
+                        <p class="text-sm font-semibold">Years Experience</p>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold mb-4">About Me</h2>
+                    <h3 class="text-xl text-brand-accent mb-4">BS Computer Science Graduate | University of Chitral</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        I am Jawad Hussain Shah, an energetic graphic designer and web developer based in Chitral.
+                        Currently a Graphic Designer at <strong>HindukushSoft Technologies</strong> and former President
+                        of the <strong>Youth Empowerment Club</strong>.
+                    </p>
+                    <p class="text-gray-400 mb-6">
+                        I bridge the gap between technical functionality and creative aesthetics. Whether it's a sleek
+                        logo, a Facebook ad, or a full website UI, I deliver precision.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-gray-700 p-3 rounded flex items-center gap-3">
+                            <i class="fab fa-adobe text-orange-500 text-xl"></i> <span>Illustrator</span>
+                        </div>
+                        <div class="bg-gray-700 p-3 rounded flex items-center gap-3">
+                            <i class="fab fa-adobe text-blue-500 text-xl"></i> <span>Photoshop</span>
+                        </div>
+                        <div class="bg-gray-700 p-3 rounded flex items-center gap-3">
+                            <span class="text-cyan-400 font-bold text-xl">C</span> <span>Canva</span>
+                        </div>
+                        <div class="bg-gray-700 p-3 rounded flex items-center gap-3">
+                            <i class="fas fa-bullhorn text-red-400 text-xl"></i> <span>Marketing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-12">My Services</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div
+                    class="bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-brand-DEFAULT/20 hover:-translate-y-2 transition duration-300 border border-gray-700">
+                    <div
+                        class="w-16 h-16 bg-blue-900/50 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-400 text-2xl">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Social Media Design</h3>
+                    <p class="text-gray-400">Eye-catching Instagram posts, Facebook covers, and LinkedIn headers that
+                        drive engagement.</p>
+                </div>
+                <div
+                    class="bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-brand-DEFAULT/20 hover:-translate-y-2 transition duration-300 border border-gray-700">
+                    <div
+                        class="w-16 h-16 bg-purple-900/50 rounded-full flex items-center justify-center mx-auto mb-6 text-purple-400 text-2xl">
+                        <i class="fas fa-print"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Print Media</h3>
+                    <p class="text-gray-400">Professional Flyers, Brochures, and Posters designed for print-ready high
+                        resolution.</p>
+                </div>
+                <div
+                    class="bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-brand-DEFAULT/20 hover:-translate-y-2 transition duration-300 border border-gray-700">
+                    <div
+                        class="w-16 h-16 bg-green-900/50 rounded-full flex items-center justify-center mx-auto mb-6 text-green-400 text-2xl">
+                        <i class="fas fa-ad"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Product Ads</h3>
+                    <p class="text-gray-400">High-converting ad creatives for e-commerce products designed to maximize
+                        sales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-14">
+                <p class="text-brand-accent font-semibold tracking-widest uppercase text-sm mb-3">Portfolio</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Featured Work</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">Click on any category to explore the full gallery in a
+                    Pinterest-style feed.</p>
+            </div>
+
+            <!-- Category Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="category-grid">
+
+                <!-- Instagram -->
+                <div class="category-card" data-gallery="instagram">
+                    <img src="images/category-icons/instagram.png" alt="Instagram 3D Icon" class="card-img"
+                        style="object-fit: cover;">
+                    <div class="card-overlay">
+                        <div class="flex items-center gap-3 mb-1">
+                            <i class="fab fa-instagram text-pink-400 text-2xl"></i>
+                            <h3 class="text-xl font-bold text-white">Instagram</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-2">Posts, stories & campaign creatives</p>
+                        <span class="card-cta text-brand-accent font-semibold text-sm">View Gallery &rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Facebook -->
+                <div class="category-card" data-gallery="facebook">
+                    <img src="images/category-icons/facebook.png" alt="Facebook 3D Icon" class="card-img"
+                        style="object-fit: cover;">
+                    <div class="card-overlay">
+                        <div class="flex items-center gap-3 mb-1">
+                            <i class="fab fa-facebook text-blue-400 text-2xl"></i>
+                            <h3 class="text-xl font-bold text-white">Facebook</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-2">Ads, posts & page creatives</p>
+                        <span class="card-cta text-brand-accent font-semibold text-sm">View Gallery &rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Flyers -->
+                <div class="category-card" data-gallery="flyers">
+                    <img src="images/category-icons/flyers.png" alt="Flyers 3D Icon" class="card-img"
+                        style="object-fit: cover;">
+                    <div class="card-overlay">
+                        <div class="flex items-center gap-3 mb-1">
+                            <i class="fas fa-scroll text-yellow-400 text-2xl"></i>
+                            <h3 class="text-xl font-bold text-white">Flyers</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-2">Event & promotional flyers</p>
+                        <span class="card-cta text-brand-accent font-semibold text-sm">View Gallery &rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Product Ads -->
+                <div class="category-card" data-gallery="productads">
+                    <img src="images/category-icons/product-ads.png" alt="Product Ads 3D Icon" class="card-img"
+                        style="object-fit: cover;">
+                    <div class="card-overlay">
+                        <div class="flex items-center gap-3 mb-1">
+                            <i class="fas fa-ad text-green-400 text-2xl"></i>
+                            <h3 class="text-xl font-bold text-white">Product Ads</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-2">High-conversion ad creatives</p>
+                        <span class="card-cta text-brand-accent font-semibold text-sm">View Gallery &rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Social Media Covers -->
+                <div class="category-card" data-gallery="covers">
+                    <img src="images/category-icons/social-covers.png" alt="Social Media Covers 3D Icon"
+                        class="card-img" style="object-fit: cover;">
+                    <div class="card-overlay">
+                        <div class="flex items-center gap-3 mb-1">
+                            <i class="fas fa-image text-purple-400 text-2xl"></i>
+                            <h3 class="text-xl font-bold text-white">Social Media Covers</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-2">Facebook & social banners</p>
+                        <span class="card-cta text-brand-accent font-semibold text-sm">View Gallery &rarr;</span>
+                    </div>
+                </div>
+
+                <!-- Visiting Cards -->
+                <div class="category-card" data-gallery="visitingcards">
+                    <img src="images/category-icons/visiting-cards.png" alt="Visiting Cards 3D Icon" class="card-img"
+                        style="object-fit: cover;">
+                    <div class="card-overlay">
+                        <div class="flex items-center gap-3 mb-1">
+                            <i class="fas fa-id-card text-cyan-400 text-2xl"></i>
+                            <h3 class="text-xl font-bold text-white">Visiting Cards</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-2">Professional business cards</p>
+                        <span class="card-cta text-brand-accent font-semibold text-sm">View Gallery &rarr;</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Reusable Gallery Modal -->
+        <div id="gallery-modal"
+            class="gallery-modal fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm">
+            <div class="modal-content relative bg-gray-900 rounded-2xl shadow-2xl flex flex-col"
+                style="width:92vw;max-width:1400px;height:90vh;">
+                <div class="flex items-center justify-between px-6 py-4 border-b border-gray-700/50">
+                    <h2 id="gallery-title" class="text-2xl font-bold text-white"></h2>
+                    <button id="close-gallery"
+                        class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-red-600 text-gray-300 hover:text-white text-xl transition">&times;</button>
+                </div>
+                <div class="overflow-y-auto flex-1 p-6" id="gallery-scroll">
+                    <div class="masonry-grid" id="gallery-grid"></div>
+                    <div id="gallery-empty"
+                        class="hidden flex flex-col items-center justify-center py-20 text-gray-500">
+                        <i class="fas fa-images text-5xl mb-4"></i>
+                        <p class="text-xl">No images yet</p>
+                        <p class="text-sm mt-2">Add images to this category folder to see them here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lightbox for full-size image view -->
+        <div id="lightbox" class="lightbox fixed inset-0 z-[60] flex items-center justify-center bg-black/95">
+            <button id="lightbox-close"
+                class="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-gray-800/80 hover:bg-red-600 text-white text-2xl transition z-10">&times;</button>
+            <button id="lightbox-prev"
+                class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-gray-800/80 hover:bg-brand-DEFAULT text-white text-xl transition z-10"><i
+                    class="fas fa-chevron-left"></i></button>
+            <button id="lightbox-next"
+                class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-gray-800/80 hover:bg-brand-DEFAULT text-white text-xl transition z-10"><i
+                    class="fas fa-chevron-right"></i></button>
+            <img id="lightbox-img" src="" alt="Full size"
+                class="max-w-[90vw] max-h-[85vh] object-contain rounded-lg shadow-2xl">
+        </div>
+    </section>
+
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-10 text-center">My Journey</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <div>
+                    <h3 class="text-2xl text-brand-accent mb-6"><i class="fas fa-graduation-cap mr-2"></i> Education
+                    </h3>
+                    <div class="border-l-4 border-gray-700 pl-6 mb-8 relative">
+                        <div class="absolute w-4 h-4 bg-brand-DEFAULT rounded-full -left-2.5 top-1"></div>
+                        <h4 class="text-xl font-bold">BS Computer Science</h4>
+                        <p class="text-gray-400">University of Chitral | 2021 - 2025</p>
+                        <p class="text-gray-500 text-sm mt-2">GPA: 3.20 | Passionate about Student Development.</p>
+                    </div>
+                    <div class="border-l-4 border-gray-700 pl-6 relative">
+                        <div class="absolute w-4 h-4 bg-gray-600 rounded-full -left-2.5 top-1"></div>
+                        <h4 class="text-xl font-bold">ICS</h4>
+                        <p class="text-gray-400">Govt. College Chitral | 2019 - 2021</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl text-brand-accent mb-6"><i class="fas fa-briefcase mr-2"></i> Experience</h3>
+                    <div class="border-l-4 border-gray-700 pl-6 mb-8 relative">
+                        <div class="absolute w-4 h-4 bg-brand-DEFAULT rounded-full -left-2.5 top-1"></div>
+                        <h4 class="text-xl font-bold">Graphic Designer</h4>
+                        <p class="text-gray-400">HindukushSoft Technologies | Current</p>
+                        <p class="text-gray-500 text-sm mt-2">Designing communication materials and working with diverse
+                            teams.</p>
+                    </div>
+                    <div class="border-l-4 border-gray-700 pl-6 relative">
+                        <div class="absolute w-4 h-4 bg-gray-600 rounded-full -left-2.5 top-1"></div>
+                        <h4 class="text-xl font-bold">President - Youth Empowerment Club</h4>
+                        <p class="text-gray-400">2025 - 2026</p>
+                        <p class="text-gray-500 text-sm mt-2">Guided 200+ student volunteers in leadership activities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-gray-800 border-t border-gray-700">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-4xl font-bold text-center mb-12">Let's Work Together</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-4">
+                        <div
+                            class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center text-brand-accent">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Phone</p>
+                            <p class="text-xl font-semibold">+92 3400178565</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div
+                            class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center text-brand-accent">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Email</p>
+                            <p class="text-xl font-semibold text-sm md:text-xl">jawad.bscs2125@uoch.edu.pk</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div
+                            class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center text-brand-accent">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Location</p>
+                            <p class="text-xl font-semibold">Faizabad Hone, Chitral</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="mailto:jawad.bscs2125@uoch.edu.pk" method="post" enctype="text/plain" class="space-y-4">
+                    <input type="text" placeholder="Your Name"
+                        class="w-full p-3 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:border-brand-DEFAULT">
+                    <input type="email" placeholder="Your Email"
+                        class="w-full p-3 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:border-brand-DEFAULT">
+                    <textarea rows="4" placeholder="Tell me about your project..."
+                        class="w-full p-3 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:border-brand-DEFAULT"></textarea>
+                    <button type="submit"
+                        class="w-full bg-brand-DEFAULT hover:bg-brand-dark text-white font-bold py-3 rounded transition shadow-lg">Send
+                        Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 py-8 text-center text-gray-500 border-t border-gray-800">
+        <p>&copy; 2026 Jawad Hussain Shah. All rights reserved.</p>
+        <div class="mt-4 space-x-4">
+            <a href="#" class="hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-white transition"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('menu-btn');
+        const nav = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            nav.classList.toggle('hidden');
+        });
+
+        // ===== Gallery Data =====
+        const galleryData = {
+            instagram: {
+                title: 'Instagram Gallery',
+                images: [
+                    'images/instagram/instagram (1).jpg',
+                    'images/instagram/instagram (2).jpg',
+                    'images/instagram/instagram (3).jpg',
+                    'images/instagram/instagram (4).jpg',
+                    'images/instagram/instagram (5).jpg',
+                    'images/instagram/instagram (6).jpg',
+                    'images/instagram/instagram (7).jpg',
+                    'images/instagram/instagram (8).jpg',
+                    'images/instagram/instagram (9).jpg'
+                ]
+            },
+            facebook: {
+                title: 'Facebook Gallery',
+                images: [
+                    'images/facebook/facebook (1).jpg',
+                    'images/facebook/facebook (1).png',
+                    'images/facebook/facebook (2).jpg',
+                    'images/facebook/facebook (2).png',
+                    'images/facebook/facebook (3).jpg',
+                    'images/facebook/facebook (4).jpg',
+                    'images/facebook/facebook (5).jpg',
+                    'images/facebook/facebook (6).jpg',
+                    'images/facebook/facebook (7).jpg',
+                    'images/facebook/facebook (8).jpg',
+                    'images/facebook/facebook (9).jpg',
+                    'images/facebook/facebook (10).jpg',
+                    'images/facebook/facebook (11).jpg',
+                    'images/facebook/facebook (12).jpg',
+                    'images/facebook/facebook (13).jpg',
+                    'images/facebook/facebook (14).jpg',
+                    'images/facebook/facebook (15).jpg',
+                    'images/facebook/facebook (16).jpg'
+                ]
+            },
+            flyers: {
+                title: 'Flyers Gallery',
+                images: [
+                    'images/Flyers/flyer (1).jpg',
+                    'images/Flyers/flyer (2).jpg'
+                ]
+            },
+            productads: {
+                title: 'Product Ads Gallery',
+                images: [
+                    'images/Product Ads/ads (1).jpg',
+                    'images/Product Ads/ads (2).jpg'
+                ]
+            },
+            covers: {
+                title: 'Social Media Covers Gallery',
+                images: [
+                    'images/covers/Facebook cover@2x.jpg',
+                    'images/covers/UHO facebook cover.jpg'
+                ]
+            },
+            visitingcards: {
+                title: 'Visiting Cards Gallery',
+                images: []
+            }
+        };
+
+        // ===== Gallery Modal =====
+        const galleryModal = document.getElementById('gallery-modal');
+        const galleryTitle = document.getElementById('gallery-title');
+        const galleryGrid = document.getElementById('gallery-grid');
+        const galleryEmpty = document.getElementById('gallery-empty');
+        const closeGalleryBtn = document.getElementById('close-gallery');
+        let currentGalleryImages = [];
+
+        function openGallery(category) {
+            const data = galleryData[category];
+            if (!data) return;
+
+            galleryTitle.textContent = data.title;
+            galleryGrid.innerHTML = '';
+            currentGalleryImages = data.images;
+
+            if (data.images.length === 0) {
+                galleryGrid.classList.add('hidden');
+                galleryEmpty.classList.remove('hidden');
+            } else {
+                galleryGrid.classList.remove('hidden');
+                galleryEmpty.classList.add('hidden');
+
+                data.images.forEach((src, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'masonry-item';
+                    item.innerHTML = `<img src="${src}" alt="${data.title} ${index + 1}" loading="lazy">`;
+                    item.addEventListener('click', () => openLightbox(index));
+                    galleryGrid.appendChild(item);
+                });
+            }
+
+            document.getElementById('gallery-scroll').scrollTop = 0;
+            galleryModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGallery() {
+            galleryModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Open gallery on card click
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', () => {
+                openGallery(card.getAttribute('data-gallery'));
+            });
+        });
+
+        closeGalleryBtn.addEventListener('click', closeGallery);
+        galleryModal.addEventListener('click', (e) => {
+            if (e.target === galleryModal) closeGallery();
+        });
+
+        // ===== Lightbox =====
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
+        let currentLightboxIndex = 0;
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            lightboxImg.src = currentGalleryImages[index];
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        lightboxPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentLightboxIndex = (currentLightboxIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+            lightboxImg.src = currentGalleryImages[currentLightboxIndex];
+        });
+
+        lightboxNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentLightboxIndex = (currentLightboxIndex + 1) % currentGalleryImages.length;
+            lightboxImg.src = currentGalleryImages[currentLightboxIndex];
+        });
+
+        // ===== Keyboard Shortcuts =====
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (lightbox.classList.contains('active')) {
+                    closeLightbox();
+                } else if (galleryModal.classList.contains('active')) {
+                    closeGallery();
+                }
+            }
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'ArrowLeft') lightboxPrev.click();
+                if (e.key === 'ArrowRight') lightboxNext.click();
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+Primary Color (Royal Blue)
+Used for: Main buttons, headlines, links, logos.
+
+HEX: #2563EB
+
+RGB: 37, 99, 235
+
+CMYK: 80, 60, 0, 0
+
+Secondary Color (Amber Gold)
+Used for: Accents, icons, highlights, call-to-actions.
+
+HEX: #FBBF24
+
+RGB: 251, 191, 36
+
+CMYK: 0, 25, 90, 0
