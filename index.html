@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J.Pixels | Graphic Designer Portfolio</title>
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon-light.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" href="images/favicon-dark.png" media="(prefers-color-scheme: dark)">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -262,6 +263,8 @@
 </head>
 
 <body class="bg-gray-900 text-gray-100 font-sans antialiased">
+    <!-- Tech Lines Animation Background -->
+    <canvas id="tech-canvas" class="fixed inset-0 z-0 pointer-events-none opacity-40 mix-blend-screen"></canvas>
 
     <nav class="fixed w-full z-50 bg-gray-900/95 backdrop-blur shadow-lg border-b border-gray-800">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -641,15 +644,52 @@
         </div>
     </section>
 
-    <footer class="bg-gray-900 py-6 sm:py-8 text-center text-gray-500 border-t border-gray-800 px-4">
-        <p class="text-xs sm:text-sm">&copy; 2026 J.Pixels. All rights reserved.</p>
-        <div class="mt-3 sm:mt-4 space-x-4">
-            <a href="https://web.facebook.com/Jawad.Hussai9.JD" class="hover:text-white transition text-lg"><i
-                    class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/jawad.00jd/" class="hover:text-white transition text-lg"><i
-                    class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/jawad-hussain-ctl" class="hover:text-white transition text-lg"><i
-                    class="fab fa-linkedin-in"></i></a>
+    <footer class="bg-gray-900 border-t border-gray-800 pt-12 pb-8 sm:pt-16 sm:pb-10 px-6 sm:px-12 relative z-10">
+        <!-- Back to Top Button -->
+        <a href="#home" class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-gray-800 border-4 border-gray-900 rounded-full flex items-center justify-center text-brand-accent hover:bg-brand-DEFAULT hover:text-white transition shadow-[0_0_15px_rgba(0,0,0,0.5)]" aria-label="Back to top">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16 mb-12">
+                <!-- Brand & Tagline -->
+                <div class="text-center md:text-left">
+                    <a href="#" class="text-3xl font-bold text-white tracking-wider inline-block mb-4">J.Pixels</a>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
+                        Bridging the gap between technical functionality and creative aesthetics. Elevating brands through precision design.
+                    </p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="text-center md:text-left">
+                    <h4 class="text-white font-semibold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#about" class="text-gray-400 hover:text-brand-accent transition">About Me</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-brand-accent transition">Services</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-brand-accent transition">Featured Work</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-brand-accent transition">Hire Me</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Let's Connect -->
+                <div class="text-center md:text-left">
+                    <h4 class="text-white font-semibold text-lg mb-4">Let's Connect</h4>
+                    <p class="text-gray-400 text-sm mb-4">Ready to start your next project? Let's create something amazing together.</p>
+                    <a href="mailto:jawad.bscs2125@uoch.edu.pk" class="inline-flex items-center gap-2 text-brand-accent hover:text-yellow-500 transition font-medium text-sm">
+                        <i class="fas fa-envelope"></i> Email Me
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-gray-500 text-xs sm:text-sm">&copy; 2026 J.Pixels. All rights reserved.</p>
+                <div class="flex items-center space-x-5">
+                    <a href="https://web.facebook.com/Jawad.Hussai9.JD" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-DEFAULT hover:text-white transition transform hover:-translate-y-1 shadow-lg"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/jawad.00jd/" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-pink-500 hover:to-purple-600 hover:text-white transition transform hover:-translate-y-1 shadow-lg"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/jawad-hussain-ctl" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-[#0077b5] hover:text-white transition transform hover:-translate-y-1 shadow-lg"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
         </div>
     </footer>
 
@@ -878,6 +918,116 @@
                 if (e.key === 'ArrowRight') lightboxNext.click();
             }
         });
+
+        // ===== Tech Lines Animation =====
+        const canvas = document.getElementById('tech-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+        let mouse = { x: null, y: null };
+
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5; // Very small, elegant dots
+                // Extremely slow drift
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Subtle repulsion from mouse
+                if (mouse.x != null && mouse.y != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 150) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (150 - distance) / 150;
+                        const directionX = forceDirectionX * force * 1.5;
+                        const directionY = forceDirectionY * force * 1.5;
+                        
+                        this.x -= directionX;
+                        this.y -= directionY;
+                    }
+                }
+                
+                // Wrap around screen instead of bouncing for smoother continuous flow
+                if(this.x < 0) this.x = canvas.width;
+                if(this.x > canvas.width) this.x = 0;
+                if(this.y < 0) this.y = canvas.height;
+                if(this.y > canvas.height) this.y = 0;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(59, 130, 246, 0.4)'; // Subdued brand blue
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            // Lower density for elegance
+            let numParticles = Math.min(Math.floor((window.innerWidth * window.innerHeight) / 18000), 100);
+            for (let i = 0; i < numParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function connect() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a + 1; b < particlesArray.length; b++) {
+                    let dx = particlesArray[a].x - particlesArray[b].x;
+                    let dy = particlesArray[a].y - particlesArray[b].y;
+                    let distance = dx * dx + dy * dy;
+
+                    // Clean, long connection lines with low opacity
+                    if (distance < 20000) { 
+                        let opacityValue = 1 - (distance / 20000);
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${opacityValue * 0.2})`; // Very faint lines
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            connect();
+            requestAnimationFrame(animateParticles);
+        }
+
+        resizeCanvas();
+        animateParticles();
     </script>
 </body>
 
