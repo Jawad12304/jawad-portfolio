@@ -1,0 +1,438 @@
+/* PixelArtShowcase.module.css
+ * Styling for the example/showcase page
+ */
+
+/* ============================================================================
+   TYPOGRAPHY & COLORS
+   ============================================================================ */
+
+:root {
+  --font-display: 'Orbitron', 'Courier New', monospace;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --font-code: 'Monaco', 'Courier New', monospace;
+
+  --color-bg: #0a0e27;
+  --color-surface: #16213e;
+  --color-accent-primary: #ff006e;
+  --color-accent-secondary: #00d9ff;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #add8e6;
+  --color-border: rgba(255, 0, 110, 0.2);
+}
+
+/* ============================================================================
+   GLOBAL STYLES
+   ============================================================================ */
+
+.showcase {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-surface) 100%);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+/* ============================================================================
+   HERO SECTION
+   ============================================================================ */
+
+.hero {
+  padding: clamp(40px, 10vw, 80px) clamp(20px, 5vw, 40px);
+  text-align: center;
+  background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(0, 217, 255, 0.1) 100%);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.mainTitle {
+  margin: 0 0 12px 0;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 8vw, 56px);
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroDescription {
+  margin: 0;
+  font-size: clamp(14px, 3vw, 18px);
+  color: var(--color-text-secondary);
+  letter-spacing: 1px;
+}
+
+/* ============================================================================
+   SECTION STYLING
+   ============================================================================ */
+
+.gallerySection,
+.docSection,
+.paletteSection,
+.patternSection,
+.tipsSection {
+  padding: clamp(40px, 8vw, 60px) clamp(20px, 5vw, 40px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sectionTitle {
+  margin: 0 0 clamp(24px, 5vw, 40px) 0;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 5vw, 36px);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-accent-secondary);
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent-primary), transparent);
+  border-radius: 2px;
+}
+
+/* ============================================================================
+   GALLERY & GRID LAYOUT
+   ============================================================================ */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(24px, 5vw, 40px);
+  margin: 0;
+}
+
+.galleryItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 0;
+  transition: transform 300ms ease-out;
+}
+
+.galleryItem:hover {
+  transform: translateY(-8px);
+}
+
+.itemMeta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: var(--font-code);
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.itemMeta code {
+  padding: 4px 8px;
+  background: rgba(255, 0, 110, 0.1);
+  border: 1px solid rgba(255, 0, 110, 0.2);
+  border-radius: 4px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================================
+   DOCUMENTATION CARDS
+   ============================================================================ */
+
+.docContent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: clamp(20px, 4vw, 32px);
+  margin: 0;
+}
+
+.docCard {
+  padding: 24px;
+  background: rgba(22, 33, 62, 0.6);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  transition: all 300ms ease-out;
+}
+
+.docCard:hover {
+  border-color: rgba(255, 0, 110, 0.4);
+  box-shadow: 0 8px 24px rgba(255, 0, 110, 0.1);
+  background: rgba(22, 33, 62, 0.8);
+}
+
+.docCard h3 {
+  margin: 0 0 16px 0;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--color-accent-primary);
+  text-transform: uppercase;
+}
+
+.code {
+  margin: 0;
+  padding: 16px;
+  background: rgba(10, 14, 39, 0.8);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  border-radius: 6px;
+  font-family: var(--font-code);
+  font-size: 12px;
+  line-height: 1.5;
+  color: #7bc94f;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ============================================================================
+   PALETTE GRID
+   ============================================================================ */
+
+.paletteGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.paletteCard {
+  padding: 20px;
+  background: rgba(22, 33, 62, 0.6);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  text-align: center;
+  transition: all 300ms ease-out;
+}
+
+.paletteCard:hover {
+  border-color: rgba(255, 0, 110, 0.4);
+  box-shadow: 0 8px 24px rgba(255, 0, 110, 0.1);
+}
+
+.paletteCard h4 {
+  margin: 0 0 12px 0;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--color-accent-secondary);
+  text-transform: uppercase;
+}
+
+.colorSwatches {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+  justify-content: center;
+}
+
+.swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: transform 200ms ease-out;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.swatch:hover {
+  transform: scale(1.1);
+}
+
+.colorCode {
+  display: block;
+  font-family: var(--font-code);
+  font-size: 10px;
+  color: var(--color-text-secondary);
+  margin: 0;
+  word-break: break-all;
+}
+
+/* ============================================================================
+   PATTERN SECTION
+   ============================================================================ */
+
+.patternList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.patternCard {
+  padding: 20px;
+  background: rgba(22, 33, 62, 0.6);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: all 300ms ease-out;
+}
+
+.patternCard:hover {
+  border-color: rgba(255, 0, 110, 0.4);
+  box-shadow: 0 8px 24px rgba(255, 0, 110, 0.1);
+}
+
+.patternCard h4 {
+  margin: 0 0 8px 0;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--color-accent-primary);
+  text-transform: uppercase;
+}
+
+.patternCard p {
+  margin: 0 0 12px 0;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.patternCard code {
+  display: block;
+  padding: 8px 12px;
+  background: rgba(255, 0, 110, 0.1);
+  border: 1px solid rgba(255, 0, 110, 0.2);
+  border-radius: 4px;
+  font-family: var(--font-code);
+  font-size: 11px;
+  color: #7bc94f;
+  margin: 0;
+}
+
+/* ============================================================================
+   TIPS SECTION
+   ============================================================================ */
+
+.tipsSection {
+  border-bottom: none;
+}
+
+.tipsList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.tipsList li {
+  padding: 20px;
+  background: rgba(22, 33, 62, 0.6);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  border-left: 3px solid var(--color-accent-primary);
+  transition: all 300ms ease-out;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.tipsList li:hover {
+  border-color: rgba(255, 0, 110, 0.4);
+  box-shadow: 0 8px 24px rgba(255, 0, 110, 0.1);
+}
+
+.tipsList li strong {
+  color: var(--color-accent-secondary);
+  font-weight: 600;
+}
+
+.tipsList li code {
+  display: inline-block;
+  padding: 2px 6px;
+  background: rgba(255, 0, 110, 0.1);
+  border: 1px solid rgba(255, 0, 110, 0.2);
+  border-radius: 3px;
+  font-family: var(--font-code);
+  font-size: 11px;
+  color: #7bc94f;
+  margin: 0 4px;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .docContent {
+    grid-template-columns: 1fr;
+  }
+
+  .paletteGrid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .colorSwatches {
+    gap: 4px;
+  }
+
+  .swatch {
+    width: 28px;
+    height: 28px;
+  }
+
+  .patternList {
+    grid-template-columns: 1fr;
+  }
+
+  .tipsList {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 24px 16px;
+  }
+
+  .gallerySection,
+  .docSection,
+  .paletteSection,
+  .patternSection,
+  .tipsSection {
+    padding: 24px 16px;
+  }
+
+  .mainTitle {
+    font-size: 28px;
+  }
+
+  .sectionTitle {
+    font-size: 18px;
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & MOTION
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg: #f5f5f5;
+    --color-surface: #eeeeee;
+    --color-text-primary: #1a1a1a;
+    --color-text-secondary: #666666;
+  }
+}

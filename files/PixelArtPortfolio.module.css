@@ -1,0 +1,321 @@
+/* PixelArtPortfolio.module.css
+ * Production-grade styling for interactive pixel art component
+ * Features: smooth animations, responsive grid, glow effects, hover interactions
+ */
+
+/* ============================================================================
+   DESIGN SYSTEM & VARIABLES
+   ============================================================================ */
+
+:root {
+  /* Typography */
+  --font-display: 'Orbitron', 'Courier New', monospace;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+
+  /* Spacing & Sizing */
+  --spacing-unit: 8px;
+  --pixel-size: 32px;
+
+  /* Animation */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================================
+   CONTAINER & LAYOUT
+   ============================================================================ */
+
+.container {
+  position: relative;
+  display: inline-block;
+  padding: calc(var(--spacing-unit) * 3);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0a0e27 0%, #16213e 100%);
+  border: 1px solid rgba(255, 0, 110, 0.2);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.container:hover {
+  border-color: rgba(255, 0, 110, 0.5);
+  box-shadow: 0 12px 48px rgba(255, 0, 110, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 2);
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================================
+   HEADER (TITLE & SUBTITLE)
+   ============================================================================ */
+
+.header {
+  opacity: 0;
+  transform: translateY(-16px);
+  animation: slideInDown var(--transition-slow) ease-out forwards;
+}
+
+.headerLoaded {
+  animation: slideInDown var(--transition-slow) ease-out forwards;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 5vw, 28px);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #fff;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ff006e, #00d9ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(255, 0, 110, 0.3);
+}
+
+.subtitle {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(12px, 3vw, 16px);
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: rgba(173, 216, 230, 0.8);
+  text-transform: uppercase;
+}
+
+/* ============================================================================
+   PIXEL GRID & GRID WRAPPER
+   ============================================================================ */
+
+.gridWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  min-width: 200px;
+  max-width: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0a0e27;
+  border: 2px solid rgba(255, 0, 110, 0.3);
+  box-shadow: inset 0 0 20px rgba(0, 217, 255, 0.1);
+  transition: all var(--transition-normal);
+}
+
+.gridWrapper.hovering {
+  border-color: rgba(255, 0, 110, 0.6);
+  box-shadow: inset 0 0 30px rgba(0, 217, 255, 0.2), 0 0 30px rgba(255, 0, 110, 0.2);
+}
+
+.pixelGrid {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  gap: 1px;
+  padding: 8px;
+  background: #0a0a14;
+  grid-auto-flow: dense;
+}
+
+/* ============================================================================
+   INDIVIDUAL PIXELS
+   ============================================================================ */
+
+.pixel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255, 0, 110, 0.1);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.pixel:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(255, 0, 110, 0.3), inset 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.pixelRevealed {
+  animation: pixelReveal var(--transition-normal) ease-out forwards;
+  animation-delay: var(--stagger-delay);
+}
+
+@keyframes pixelReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 12px currentColor, inset 0 0 2px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ============================================================================
+   GLOW OVERLAY (HOVER EFFECT)
+   ============================================================================ */
+
+.glowOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 8px;
+  background: radial-gradient(circle at center, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.glowActive {
+  opacity: 1;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: inset 0 0 20px rgba(0, 217, 255, 0.2);
+  }
+  50% {
+    box-shadow: inset 0 0 40px rgba(0, 217, 255, 0.3);
+  }
+}
+
+/* ============================================================================
+   INTERACTIVE HINT
+   ============================================================================ */
+
+.hint {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: rgba(173, 216, 230, 0.6);
+  text-transform: uppercase;
+  opacity: 1;
+  transition: opacity var(--transition-normal);
+  margin-top: calc(var(--spacing-unit) * 0.5);
+}
+
+.hintHidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .container {
+    padding: calc(var(--spacing-unit) * 2);
+  }
+
+  .gridWrapper {
+    min-width: 160px;
+    max-width: 300px;
+  }
+
+  .title {
+    font-size: clamp(16px, 4vw, 24px);
+  }
+
+  .subtitle {
+    font-size: clamp(11px, 2.5vw, 14px);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--spacing-unit);
+  }
+
+  .gridWrapper {
+    min-width: 140px;
+    max-width: 240px;
+  }
+
+  .title {
+    font-size: clamp(14px, 3.5vw, 20px);
+  }
+
+  .subtitle {
+    font-size: clamp(10px, 2vw, 12px);
+  }
+
+  .pixel {
+    border-radius: 1px;
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY & FOCUS STATES
+   ============================================================================ */
+
+.container:focus-within {
+  outline: 2px solid rgba(0, 217, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.pixel:focus {
+  outline: 1px solid rgba(255, 0, 110, 0.6);
+  outline-offset: -1px;
+}
+
+/* ============================================================================
+   DARK MODE (fallback for system preference)
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: linear-gradient(135deg, #0a0e27 0%, #16213e 100%);
+  }
+}
+
+/* ============================================================================
+   REDUCED MOTION (accessibility)
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -4,25 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J.Pixels | Graphic Designer Portfolio</title>
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <title>J.Pixels | Creative Visual Storytelling</title>
+    <link rel="icon" type="image/png" href="images/New Fav Icon.png">
+    <!-- Provide brighter favicon variants for better visibility in title bar -->
+    <link rel="icon" type="image/png" href="images/New Fav Icon.png">
+    <link rel="apple-touch-icon" href="images/New Fav Icon.png">
+    <link rel="mask-icon" href="images/New Fav Icon.png" color="#f59e0b">
+    <meta name="theme-color" content="#09111f">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Fraunces', 'serif'],
                     },
                     colors: {
                         brand: {
-                            light: '#3b82f6',
-                            DEFAULT: '#2563eb',
-                            dark: '#1e40af',
-                            accent: '#fbbf24' // Gold accent
+                            light: '#6ee7ff',
+                            DEFAULT: '#06b6d4',
+                            dark: '#0f766e',
+                            accent: '#f59e0b'
                         }
                     }
                 }
@@ -30,6 +36,160 @@
         }
     </script>
     <style>
+        :root {
+            --bg-0: #050816;
+            --bg-1: #09111f;
+            --bg-2: #111c33;
+            --line: rgba(255, 255, 255, 0.08);
+            --glass: rgba(6, 11, 22, 0.62);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(6, 182, 212, 0.18), transparent 34%),
+                radial-gradient(circle at top right, rgba(245, 158, 11, 0.16), transparent 30%),
+                linear-gradient(180deg, var(--bg-0), var(--bg-1) 42%, var(--bg-0));
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-panel {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(18px);
+        }
+
+        /* Ensure decorations inside glass panels sit behind main content */
+        .glass-panel > .absolute { z-index: 0; }
+
+        .soft-ring {
+            position: absolute;
+            border-radius: 9999px;
+            filter: blur(12px);
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            background-image:
+                linear-gradient(var(--line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--line) 1px, transparent 1px);
+            background-size: 96px 96px;
+            mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1), transparent 85%);
+        }
+
+        .section-eyebrow {
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+        }
+
+        .marquee-track {
+            animation: marquee 26s linear infinite;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .stat-pill {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-card,
+        .journey-card,
+        .contact-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .feature-card::before,
+        .journey-card::before,
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.12), transparent 35%, rgba(245, 158, 11, 0.08));
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+        }
+
+        .feature-card:hover::before,
+        .journey-card:hover::before,
+        .contact-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover,
+        .journey-card:hover,
+        .contact-card:hover {
+            transform: translateY(-6px);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            box-shadow: 0 22px 70px rgba(0, 0, 0, 0.34);
+        }
+
+        .hero-title {
+            font-family: 'Fraunces', serif;
+            text-wrap: balance;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #f8fafc 0%, #67e8f9 40%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .accent-glow {
+            text-shadow: 0 0 22px rgba(6, 182, 212, 0.28);
+        }
+
+        .hero-subtitle {
+            max-width: 64ch;
+        }
+
+        .portrait-frame {
+            background: radial-gradient(circle at top, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Tools chip row helpers */
+        .chips-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 0.5rem; align-items: center; }
+        .chip { display: flex; align-items: center; justify-content: center; gap: .5rem; flex: 1; white-space: nowrap; padding: 0.45rem 0.75rem; background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.08); color: #f8fafc; font-weight:600; font-size:0.92rem; border-radius:9999px; overflow: hidden; text-overflow: ellipsis; }
+        .chip .brand { color: #f59e0b; font-weight:700; }
+
+        .portrait-image {
+            object-fit: contain;
+            object-position: center top;
+            background: rgba(2, 6, 23, 0.55);
+        }
+
         .portfolio-item {
             transition: all 0.3s ease-in-out;
         }
@@ -39,7 +199,10 @@
         }
 
         .hero-bg {
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background:
+                radial-gradient(circle at 20% 20%, rgba(6, 182, 212, 0.18), transparent 24%),
+                radial-gradient(circle at 80% 15%, rgba(245, 158, 11, 0.14), transparent 18%),
+                linear-gradient(180deg, rgba(2, 6, 23, 0.76), rgba(2, 6, 23, 0.94));
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -109,21 +272,24 @@
         .category-card {
             position: relative;
             overflow: hidden;
-            border-radius: 16px;
+            border-radius: 22px;
             cursor: pointer;
             aspect-ratio: 4/3;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.04);
         }
 
         .category-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 50px rgba(37, 99, 235, 0.25);
+            box-shadow: 0 26px 60px rgba(6, 182, 212, 0.18);
+            border-color: rgba(6, 182, 212, 0.35);
         }
 
         .category-card .card-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.1) 100%);
+            background: linear-gradient(to top, rgba(3, 7, 18, 0.95) 0%, rgba(3, 7, 18, 0.28) 50%, rgba(3, 7, 18, 0.04) 100%);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -132,7 +298,7 @@
         }
 
         .category-card:hover .card-overlay {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.2) 100%);
+            background: linear-gradient(to top, rgba(3, 7, 18, 0.98) 0%, rgba(3, 7, 18, 0.44) 50%, rgba(3, 7, 18, 0.1) 100%);
         }
 
         .category-card .card-img {
@@ -171,6 +337,201 @@
             pointer-events: auto;
         }
 
+        .nav-shell {
+            background: rgba(2, 6, 23, 0.72);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+        }
+
+        .section-heading {
+            font-family: 'Fraunces', serif;
+            text-wrap: balance;
+        }
+
+        .lift {
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .lift:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        .spotlight {
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15), transparent 65%);
+        }
+
+        /* ===== PIXEL ART PORTFOLIO STYLES ===== */
+        .pixel-container {
+            position: relative;
+            display: inline-block;
+            padding: 24px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(245, 158, 11, 0.05));
+            border: 1px solid rgba(255, 0, 110, 0.2);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .pixel-container:hover {
+            border-color: rgba(6, 182, 212, 0.5);
+            box-shadow: 0 12px 48px rgba(6, 182, 212, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .pixel-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pixel-header {
+            opacity: 0;
+            transform: translateY(-16px);
+            animation: slideInDown 0.6s ease-out forwards;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .pixel-header .pixel-title {
+            margin: 0;
+            display: inline-block;
+        }
+
+        .pixel-header .pixel-subtitle {
+            margin: 0;
+            display: inline-block;
+        }
+
+        .pixel-header::before {
+            content: '|';
+            color: rgba(226, 232, 240, 0.6);
+            font-weight: 300;
+        }
+
+        .pixel-title {
+            margin: 0;
+            font-family: 'Fraunces', serif;
+            font-size: clamp(18px, 5vw, 28px);
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #fff;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #f8fafc 0%, #67e8f9 40%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pixel-subtitle {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(12px, 3vw, 16px);
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: rgba(226, 232, 240, 0.8);
+            text-transform: uppercase;
+        }
+
+        .pixel-grid-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            min-width: 200px;
+            max-width: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #0a0a14;
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            box-shadow: inset 0 0 20px rgba(6, 182, 212, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .pixel-grid-wrapper.hovering {
+            border-color: rgba(6, 182, 212, 0.6);
+            box-shadow: inset 0 0 30px rgba(6, 182, 212, 0.2), 0 0 30px rgba(6, 182, 212, 0.2);
+        }
+
+        .pixel-grid {
+            display: grid;
+            width: 100%;
+            height: 100%;
+            gap: 1px;
+            padding: 8px;
+            background: #0a0a14;
+        }
+
+        .pixel {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 2px;
+            background-color: #1a1a1a;
+            border: 1px solid rgba(6, 182, 212, 0.1);
+            cursor: pointer;
+            box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+            transition: all 0.15s ease;
+        }
+
+        .pixel:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 8px rgba(6, 182, 212, 0.3), inset 0 0 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .pixel.revealed {
+            animation: pixelReveal 0.3s ease-out forwards;
+        }
+
+        @keyframes pixelReveal {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+                box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+                box-shadow: 0 0 12px currentColor, inset 0 0 2px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        .pixel-hint {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: rgba(226, 232, 240, 0.6);
+            text-transform: uppercase;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            margin-top: 4px;
+        }
+
+        .pixel-hint.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* ===== MOBILE RESPONSIVE OVERRIDES ===== */
 
         /* Fix parallax on mobile (iOS/Android don't support background-attachment: fixed well) */
@@ -178,6 +539,28 @@
             .hero-bg {
                 background-attachment: scroll;
             }
+            /* Hide large decorative rings on small screens to avoid visual overlap */
+            .soft-ring { display: none; }
+            /* Keep hero glass-panel decorations behind the main content */
+            .hero-bg .glass-panel > .absolute { z-index: 0; }
+            .hero-bg .glass-panel .grid { position: relative; z-index: 10; }
+        }
+
+        /* Desktop responsiveness improvements */
+        @media (min-width: 1024px) {
+            .section-eyebrow { letter-spacing: 0.4em; }
+            .hero-title { letter-spacing: -0.02em; }
+            .container { max-width: 1200px; margin: 0 auto; }
+            .section-heading { letter-spacing: -0.02em; }
+            /* Improve spacing on desktop cards */
+            .feature-card, .journey-card, .contact-card { padding: 2rem; }
+            /* Better grid spacing on desktop */
+            .masonry-grid { column-gap: 24px; }
+        }
+
+        @media (min-width: 1280px) {
+            .hero-title { font-size: clamp(3.5rem, 8vw, 7.5rem); }
+            .section-heading { font-size: clamp(2rem, 6vw, 3.5rem); }
         }
 
         /* Gallery modal: full-screen on mobile */
@@ -261,275 +644,312 @@
     </style>
 </head>
 
-<body class="bg-gray-900 text-gray-100 font-sans antialiased">
-    <!-- Tech Lines Animation Background -->
-    <canvas id="tech-canvas" class="fixed inset-0 z-0 pointer-events-none opacity-40 mix-blend-screen"></canvas>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased overflow-x-hidden">
+    <div class="fixed inset-0 -z-20 bg-[radial-gradient(circle_at_top,rgba(6,182,212,0.16),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(245,158,11,0.14),transparent_18%),linear-gradient(180deg,#050816_0%,#09111f_50%,#050816_100%)]"></div>
+    <div class="fixed inset-0 -z-10 hero-grid opacity-40"></div>
+    <canvas id="tech-canvas" class="fixed inset-0 z-0 pointer-events-none opacity-35 mix-blend-screen"></canvas>
 
-    <nav class="fixed w-full z-50 bg-gray-900/95 backdrop-blur shadow-lg border-b border-gray-800">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-white tracking-wider">J.Pixels</a>
+    <nav class="fixed w-full z-50 nav-shell">
+        <div class="container mx-auto px-5 sm:px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="inline-flex items-center gap-3 group">
+                <span class="w-10 h-10 rounded-2xl bg-gradient-to-br from-brand-DEFAULT to-brand-accent flex items-center justify-center text-slate-950 font-black shadow-lg shadow-cyan-500/20">
+                    <img src="images/ICON.SVG" alt="J.Pixels" class="w-6 h-6">
+                </span>
+                <span>
+                    <span class="block text-lg sm:text-xl font-bold tracking-[0.24em] text-white">J.Pixels</span>
+                    <span class="block text-[10px] uppercase tracking-[0.36em] text-slate-400">Creative Direction</span>
+                </span>
+            </a>
 
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#home" class="hover:text-brand-accent transition font-medium">Home</a>
-                <a href="#about" class="hover:text-brand-accent transition font-medium">About</a>
-                <a href="#services" class="hover:text-brand-accent transition font-medium">Services</a>
-                <a href="#portfolio" class="hover:text-brand-accent transition font-medium">Portfolio</a>
-                <a href="#contact"
-                    class="px-6 py-2 bg-brand-accent hover:bg-yellow-500 rounded-full text-gray-900 font-bold transition shadow-lg shadow-brand-accent/30">Hire
-                    Me</a>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#home" class="text-slate-300 hover:text-white transition">Home</a>
+                <a href="#about" class="text-slate-300 hover:text-white transition">About</a>
+                <a href="#services" class="text-slate-300 hover:text-white transition">Services</a>
+                <a href="#portfolio" class="text-slate-300 hover:text-white transition">Portfolio</a>
+                <a href="#contact" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-DEFAULT to-brand-accent font-bold shadow-lg shadow-cyan-500/20"><span class="gradient-text accent-glow">Hire Me</span></a>
             </div>
 
-            <button id="menu-btn" class="md:hidden text-2xl focus:outline-none">
+            <button id="menu-btn" class="md:hidden text-2xl focus:outline-none text-white">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
-        <div id="mobile-menu"
-            class="hidden md:hidden bg-gray-800 absolute w-full text-center pb-4 border-t border-gray-700">
-            <a href="#home" class="block py-3 hover:text-brand-accent transition">Home</a>
-            <a href="#about" class="block py-3 hover:text-brand-accent transition">About</a>
-            <a href="#services" class="block py-3 hover:text-brand-accent transition">Services</a>
-            <a href="#portfolio" class="block py-3 hover:text-brand-accent transition">Portfolio</a>
-            <a href="#contact" class="block py-3 mx-6 mt-2 bg-brand-accent text-gray-900 font-bold rounded-full">Hire
-                Me</a>
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full text-center pb-5 border-t border-white/10 glass-panel rounded-b-3xl overflow-hidden">
+            <a href="#home" class="block py-3 text-slate-300 hover:text-white transition">Home</a>
+            <a href="#about" class="block py-3 text-slate-300 hover:text-white transition">About</a>
+            <a href="#services" class="block py-3 text-slate-300 hover:text-white transition">Services</a>
+            <a href="#portfolio" class="block py-3 text-slate-300 hover:text-white transition">Portfolio</a>
+            <a href="#contact" class="inline-flex justify-center mx-6 mt-3 px-5 py-3 rounded-full bg-gradient-to-r from-brand-DEFAULT to-brand-accent font-bold"><span class="gradient-text accent-glow">Hire Me</span></a>
         </div>
     </nav>
 
-    <section id="home"
-        class="hero-bg min-h-screen flex items-center justify-center text-center px-4 sm:px-6 pt-20 pb-10">
-        <div class="max-w-4xl w-full">
-            <p class="text-brand-accent font-semibold tracking-widest mb-4 animate-pulse text-xs sm:text-sm">GRAPHIC
-                DESIGNER & WEB
-                DEVELOPER</p>
-            <h1 class="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 text-white leading-tight">I Create
-                Visuals That <br><span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-brand-accent">Tell Your
-                    Story.</span></h1>
-            <p class="text-gray-300 text-base sm:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto px-2">Expert in Adobe Suite &
-                Canva. Specializing in
-                high-conversion social media assets, print media, and brand identity.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4 sm:px-0">
-                <a href="#portfolio"
-                    class="px-6 sm:px-8 py-3 bg-brand-DEFAULT rounded-full font-semibold hover:bg-brand-dark transition transform hover:-translate-y-1 shadow-lg shadow-blue-500/50 text-sm sm:text-base">View
-                    My Work</a>
-                <a href="#contact"
-                    class="px-6 sm:px-8 py-3 border border-white rounded-full font-semibold hover:bg-white hover:text-black transition text-sm sm:text-base">Contact
-                    Me</a>
-            </div>
+    <section id="home" class="relative min-h-screen pt-28 sm:pt-32 pb-16 hero-bg">
+        <div class="absolute inset-x-0 top-12 h-96 pointer-events-none">
+            <div class="soft-ring w-72 h-72 bg-cyan-400/25 left-[-80px] top-0"></div>
+            <div class="soft-ring w-96 h-96 bg-amber-400/20 right-[-110px] top-10"></div>
+            <div class="soft-ring w-64 h-64 bg-fuchsia-400/14 right-[20%] top-[50%]"></div>
         </div>
-    </section>
-
-    <section id="about" class="py-12 sm:py-20 bg-gray-800">
-        <div class="container mx-auto px-4 sm:px-6">
-            <div class="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
-                <div class="relative">
-                    <img src="images/ME/JD.jpeg" alt="J.Pixels"
-                        class="rounded-lg shadow-2xl border-4 border-gray-700 grayscale hover:grayscale-0 transition duration-500 w-full max-w-md mx-auto md:max-w-none">
-                    <div
-                        class="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 bg-brand-accent text-gray-900 p-4 sm:p-6 rounded-lg shadow-xl hidden md:block">
-                        <p class="font-bold text-2xl sm:text-3xl">2+</p>
-                        <p class="text-xs sm:text-sm font-semibold">Years Experience</p>
+        <div class="container mx-auto px-5 sm:px-6 relative">
+            <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
+                <div class="reveal space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-panel text-[11px] sm:text-xs uppercase tracking-[0.32em] text-slate-300">
+                        <span class="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_24px_rgba(245,158,11,0.9)]"></span>
+                        Graphic Designer and Web Developer
                     </div>
-                    <!-- Mobile experience badge -->
-                    <div class="flex justify-center mt-4 md:hidden">
-                        <div
-                            class="bg-brand-accent text-gray-900 px-6 py-3 rounded-lg shadow-xl inline-flex items-center gap-2">
-                            <p class="font-bold text-2xl">2+</p>
-                            <p class="text-sm font-semibold">Years Experience</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center md:text-left">
-                    <h2 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">About Me</h2>
-                    <h3 class="text-base sm:text-xl text-brand-accent mb-3 sm:mb-4">BS Computer Science Graduate |
-                        University of Chitral</h3>
-                    <p class="text-gray-400 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-                        I am Jawad Hussain, an energetic graphic designer and web developer based in Chitral.
-                        Currently a Graphic Designer at <strong>HindukushSoft Technologies</strong> and former President
-                        of the <strong>Youth Empowerment Club</strong>.
+                    <h1 class="hero-title text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold leading-[0.95] text-white">
+                        I craft <span class="gradient-text accent-glow">bold visuals</span> that feel like a brand moment.
+                    </h1>
+                    <p class="hero-subtitle text-slate-100 text-base sm:text-lg lg:text-xl leading-relaxed mx-auto lg:mx-0">
+                        Turning ideas into campaign-ready visuals, high-impact social content, and polished digital identities with Adobe Suite, Canva, and a sharp eye for conversion.
                     </p>
-                    <p class="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">
-                        I bridge the gap between technical functionality and creative aesthetics. Whether it's a sleek
-                        logo, a Facebook ad, or a full website UI, I deliver precision.
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                        <a href="#portfolio" class="px-7 py-3.5 rounded-full bg-white/5 border border-white/15 font-extrabold shadow-[0_18px_40px_rgba(6,182,212,0.12)] lift"><span class="gradient-text accent-glow">Explore Portfolio</span></a>
+                        <a href="#contact" class="px-7 py-3.5 rounded-full border border-white/18 bg-white/5 text-white font-semibold lift">Start a Project</a>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3">
+                        <div class="stat-pill rounded-2xl p-4 text-left">
+                            <div class="text-2xl font-bold text-white">2+</div>
+                            <div class="text-[11px] uppercase tracking-[0.28em] text-slate-400 mt-1">Years</div>
+                        </div>
+                        <div class="stat-pill rounded-2xl p-4 text-left">
+                            <div class="text-2xl font-bold text-white">100+</div>
+                            <div class="text-[11px] uppercase tracking-[0.28em] text-slate-400 mt-1">Visuals</div>
+                        </div>
+                        <div class="stat-pill rounded-2xl p-4 text-left">
+                            <div class="text-2xl font-bold text-white">3</div>
+                            <div class="text-[11px] uppercase tracking-[0.28em] text-slate-400 mt-1">Core Services</div>
+                        </div>
+                        <div class="stat-pill rounded-2xl p-4 text-left">
+                            <div class="text-2xl font-bold text-white">1</div>
+                            <div class="text-[11px] uppercase tracking-[0.28em] text-slate-400 mt-1">Creative Voice</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal relative">
+                    <div class="absolute inset-0 rounded-[2.25rem] bg-gradient-to-br from-brand-DEFAULT/30 via-transparent to-brand-accent/20 blur-2xl"></div>
+                    <div class="relative rounded-[2rem] overflow-hidden">
+                        <div class="space-y-3">
+                            <div id="pixel-art-container" class="pixel-container">
+                                <div class="pixel-content">
+                                    <div class="pixel-header text-center mb-3">
+                                        <h2 class="pixel-title">J.Pixels</h2>
+                                        <p class="pixel-subtitle">Creative Designer</p>
+                                    </div>
+                                    <div class="pixel-grid-wrapper relative" id="pixel-wrapper">
+                                        <img src="images/JD home.jpg" alt="J.Pixels" class="w-full h-full object-cover rounded-lg">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 gap-4">
+                                <div class="glass-panel rounded-2xl p-4">
+                                    <div class="text-xs uppercase tracking-[0.26em] text-slate-400">Tools</div>
+                                    <div class="mt-3 chips-row">
+                                        <span class="chip">Illustrator</span>
+                                        <span class="chip">Photoshop</span>
+                                        <span class="chip">InDesign</span>
+                                        <span class="chip">Canva</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="border-y border-white/10 bg-white/5 overflow-hidden">
+        <div class="whitespace-nowrap py-4 text-sm sm:text-base font-semibold text-slate-300">
+            <div class="marquee-track inline-flex min-w-full gap-10 pr-10 uppercase tracking-[0.28em]">
+                <span>Campaign visuals</span>
+                <span>Social media design</span>
+                <span>Print-ready assets</span>
+                <span>Brand identity</span>
+                <span>Product ads</span>
+                <span>Motion-inspired layouts</span>
+                <span>Campaign visuals</span>
+                <span>Social media design</span>
+                <span>Print-ready assets</span>
+                <span>Brand identity</span>
+                <span>Product ads</span>
+                <span>Motion-inspired layouts</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 sm:py-28 relative">
+        <div class="container mx-auto px-5 sm:px-6">
+            <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-center">
+                <div class="reveal relative">
+                    <div class="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-brand-DEFAULT/15 to-brand-accent/10 blur-2xl"></div>
+                    <div class="relative glass-panel rounded-[2rem] p-4 sm:p-5 portrait-frame">
+                        <img src="images/ME/JD.jpeg" alt="J.Pixels" class="rounded-[1.5rem] w-full max-h-[540px] portrait-image">
+                    </div>
+                </div>
+                <div class="reveal space-y-6">
+                    <div>
+                        <p class="section-eyebrow text-brand-accent text-xs sm:text-sm font-bold mb-3">About Me</p>
+                        <h2 class="section-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">I design with structure, but I aim for emotion.</h2>
+                    </div>
+                    <p class="text-slate-200 text-base sm:text-lg leading-relaxed">
+                        I am Jawad Hussain, a creative designer at <a href="https://wefdallas.org/our-team/" target="_blank" rel="noopener noreferrer" class="text-cyan-300 font-semibold hover:text-brand-accent transition">WEF World Education Foundation</a> and a graphic designer and web developer based in Chitral. I create work that looks premium first and performs after that, which is why every layout gets a strong visual hook, clear hierarchy, and enough edge to feel memorable.
                     </p>
-
-                    <div class="grid grid-cols-2 gap-3 sm:gap-4 mb-6">
-                        <div class="bg-gray-700 p-2.5 sm:p-3 rounded flex items-center gap-2 sm:gap-3">
-                            <img src="images/software-icons/illustrator.png" alt="Illustrator"
-                                class="w-6 sm:w-8 h-6 sm:h-8 object-contain drop-shadow-lg"> <span
-                                class="text-sm sm:text-base">Illustrator</span>
+                    <p class="text-slate-300 leading-relaxed">
+                        I have also taught a <span class="text-amber-300 font-semibold break-words">NAVTTC 3-month course</span> in graphic designing and video editing, which strengthened my ability to explain ideas clearly and turn complex creative workflows into clean results.
+                    </p>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="glass-panel rounded-2xl p-5 lift">
+                            <div class="text-xs uppercase tracking-[0.28em] text-slate-400">Signature Strength</div>
+                            <div class="mt-2 text-lg font-semibold text-white">Fast concepts, clean execution</div>
                         </div>
-                        <div class="bg-gray-700 p-2.5 sm:p-3 rounded flex items-center gap-2 sm:gap-3">
-                            <img src="images/software-icons/photoshop.png" alt="Photoshop"
-                                class="w-6 sm:w-8 h-6 sm:h-8 object-contain drop-shadow-lg"> <span
-                                class="text-sm sm:text-base">Photoshop</span>
+                        <div class="glass-panel rounded-2xl p-5 lift">
+                            <div class="text-xs uppercase tracking-[0.28em] text-slate-400">Working Style</div>
+                            <div class="mt-2 text-lg font-semibold text-white">Bold, responsive, detail-driven</div>
                         </div>
-                        <div class="bg-gray-700 p-2.5 sm:p-3 rounded flex items-center gap-2 sm:gap-3">
-                            <img src="images/software-icons/canva.png" alt="Canva"
-                                class="w-6 sm:w-8 h-6 sm:h-8 object-contain drop-shadow-lg"> <span
-                                class="text-sm sm:text-base">Canva</span>
-                        </div>
-                        <div class="bg-gray-700 p-2.5 sm:p-3 rounded flex items-center gap-2 sm:gap-3">
-                            <i class="fas fa-bullhorn text-red-400 text-lg sm:text-xl"></i> <span
-                                class="text-sm sm:text-base">Marketing</span>
-                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 sm:gap-3 chips-row">
+                        <span class="chip text-xs sm:text-sm">Illustrator</span>
+                        <span class="chip text-xs sm:text-sm">Photoshop</span>
+                        <span class="chip text-xs sm:text-sm break-words">InDesign</span>
+                        <span class="chip text-xs sm:text-sm">Canva</span>
+                        <span class="chip text-xs sm:text-sm">WEF</span>
+                        <span class="chip text-xs sm:text-sm break-words">NAVTTC Trainer</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="services" class="py-12 sm:py-20 bg-gray-900">
-        <div class="container mx-auto px-4 sm:px-6 text-center">
-            <h2 class="text-3xl sm:text-4xl font-bold mb-8 sm:mb-12">My Services</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-                <div
-                    class="bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-brand-DEFAULT/20 hover:-translate-y-2 transition duration-300 border border-gray-700">
-                    <div class="w-24 h-24 mx-auto mb-6 flex items-center justify-center">
-                        <img src="images/services-icons/social-media.png" alt="Social Media Design"
-                            class="w-full h-full object-contain drop-shadow-2xl hover:scale-110 transition duration-300">
+    <section id="services" class="py-20 sm:py-28">
+        <div class="container mx-auto px-5 sm:px-6">
+            <div class="reveal text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+                <p class="section-eyebrow text-brand-accent text-xs sm:text-sm font-bold mb-3">Services</p>
+                <h2 class="section-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">Built to make your brand feel sharper, louder, and more memorable.</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <div class="feature-card rounded-[1.75rem] p-8 lift">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-400/15 flex items-center justify-center mb-6 border border-cyan-300/20">
+                        <img src="images/services-icons/social-media.png" alt="Social Media Design" class="w-11 h-11 object-contain">
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Social Media Design</h3>
-                    <p class="text-gray-400">Eye-catching Instagram posts, Facebook covers, and LinkedIn headers that
-                        drive engagement.</p>
+                    <h3 class="text-2xl font-bold text-white mb-3">Social Media Design</h3>
+                    <p class="text-slate-300 leading-relaxed">Scroll-stopping Instagram posts, Facebook covers, and campaign graphics that keep the feed visually alive.</p>
                 </div>
-                <div
-                    class="bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-brand-DEFAULT/20 hover:-translate-y-2 transition duration-300 border border-gray-700">
-                    <div class="w-24 h-24 mx-auto mb-6 flex items-center justify-center">
-                        <img src="images/services-icons/print-media.png" alt="Print Media"
-                            class="w-full h-full object-contain drop-shadow-2xl hover:scale-110 transition duration-300">
+                <div class="feature-card rounded-[1.75rem] p-8 lift">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-400/15 flex items-center justify-center mb-6 border border-amber-300/20">
+                        <img src="images/services-icons/print-media.png" alt="Print Media" class="w-11 h-11 object-contain">
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Print Media</h3>
-                    <p class="text-gray-400">Professional Flyers, Brochures, and Posters designed for print-ready high
-                        resolution.</p>
+                    <h3 class="text-2xl font-bold text-white mb-3">Print Media</h3>
+                    <p class="text-slate-300 leading-relaxed">Flyers, posters, and brochures with strong layout structure and print-ready clarity.</p>
                 </div>
-                <div
-                    class="bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-brand-DEFAULT/20 hover:-translate-y-2 transition duration-300 border border-gray-700">
-                    <div class="w-24 h-24 mx-auto mb-6 flex items-center justify-center">
-                        <img src="images/services-icons/product-ads.png" alt="Product Ads"
-                            class="w-full h-full object-contain drop-shadow-2xl hover:scale-110 transition duration-300">
+                <div class="feature-card rounded-[1.75rem] p-8 lift">
+                    <div class="w-16 h-16 rounded-2xl bg-emerald-400/15 flex items-center justify-center mb-6 border border-emerald-300/20">
+                        <img src="images/services-icons/product-ads.png" alt="Product Ads" class="w-11 h-11 object-contain">
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Product Ads</h3>
-                    <p class="text-gray-400">High-converting ad creatives for e-commerce products designed to maximize
-                        sales.</p>
+                    <h3 class="text-2xl font-bold text-white mb-3">Product Ads</h3>
+                    <p class="text-slate-300 leading-relaxed">Ad creatives designed to look premium and push attention where it matters most.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="portfolio" class="py-12 sm:py-20 bg-gray-800">
-        <div class="container mx-auto px-4 sm:px-6">
-            <div class="text-center mb-8 sm:mb-14">
-                <p class="text-brand-accent font-semibold tracking-widest uppercase text-xs sm:text-sm mb-2 sm:mb-3">
-                    Portfolio</p>
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">Featured Work</h2>
-                <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base px-2">Tap on any category to explore the
-                    full gallery.</p>
+    <section id="portfolio" class="py-20 sm:py-28">
+        <div class="container mx-auto px-5 sm:px-6">
+            <div class="reveal grid lg:grid-cols-[1fr_auto] gap-6 lg:items-end mb-10 sm:mb-14">
+                <div>
+                    <p class="section-eyebrow text-brand-accent text-xs sm:text-sm font-bold mb-3">Portfolio</p>
+                    <h2 class="section-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">Featured work with a stronger visual rhythm.</h2>
+                    <p class="text-slate-300 mt-4 max-w-2xl">Tap any category to open the gallery. Each folder is presented like a chapter, not just a folder list.</p>
+                </div>
+                <div class="glass-panel rounded-2xl px-5 py-4 text-sm text-slate-300 max-w-sm">
+                    <div class="text-xs uppercase tracking-[0.28em] text-slate-500 mb-2">Tip</div>
+                    Hover on desktop or tap on mobile to explore each set.
+                </div>
             </div>
 
-            <!-- Category Cards Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="category-grid">
-
-                <!-- Instagram -->
-                <div class="category-card" data-gallery="instagram">
-                    <img src="images/category-icons/instagram.png" alt="Instagram 3D Icon" class="card-img"
-                        style="object-fit: cover;">
+                <div class="category-card lift" data-gallery="instagram">
+                    <img src="images/category-icons/instagram.png" alt="Instagram 3D Icon" class="card-img" style="object-fit: cover;">
                     <div class="card-overlay">
                         <div class="flex items-center gap-3 mb-1">
                             <i class="fab fa-instagram text-pink-400 text-2xl"></i>
                             <h3 class="text-xl font-bold text-white">Instagram</h3>
                         </div>
-                        <p class="text-gray-300 text-sm mb-2">Posts, stories & campaign creatives</p>
-                        <span class="card-cta text-brand-accent font-semibold text-sm">View Gallery &rarr;</span>
+                        <p class="text-slate-300 text-sm mb-2">Posts, stories and campaign creatives.</p>
+                        <span class="card-cta text-brand-accent font-semibold text-sm">Open Gallery &rarr;</span>
                     </div>
                 </div>
 
-                <!-- Facebook -->
-                <div class="category-card" data-gallery="facebook">
-                    <img src="images/category-icons/facebook.png" alt="Facebook 3D Icon" class="card-img"
-                        style="object-fit: cover;">
+                <div class="category-card lift" data-gallery="facebook">
+                    <img src="images/category-icons/facebook.png" alt="Facebook 3D Icon" class="card-img" style="object-fit: cover;">
                     <div class="card-overlay">
                         <div class="flex items-center gap-3 mb-1">
                             <i class="fab fa-facebook text-blue-400 text-2xl"></i>
                             <h3 class="text-xl font-bold text-white">Facebook</h3>
                         </div>
-                        <p class="text-gray-300 text-sm mb-2">Ads, posts & page creatives</p>
-                        <span class="card-cta text-brand-accent font-semibold text-sm">View Gallery &rarr;</span>
+                        <p class="text-slate-300 text-sm mb-2">Ads, posts and page creatives.</p>
+                        <span class="card-cta text-brand-accent font-semibold text-sm">Open Gallery &rarr;</span>
                     </div>
                 </div>
 
-                <!-- Flyers -->
-                <div class="category-card" data-gallery="flyers">
-                    <img src="images/category-icons/flyers.png" alt="Flyers 3D Icon" class="card-img"
-                        style="object-fit: cover;">
+                <div class="category-card lift" data-gallery="flyers">
+                    <img src="images/category-icons/flyers.png" alt="Flyers 3D Icon" class="card-img" style="object-fit: cover;">
                     <div class="card-overlay">
                         <div class="flex items-center gap-3 mb-1">
-                            <i class="fas fa-scroll text-yellow-400 text-2xl"></i>
+                            <i class="fas fa-scroll text-amber-400 text-2xl"></i>
                             <h3 class="text-xl font-bold text-white">Flyers</h3>
                         </div>
-                        <p class="text-gray-300 text-sm mb-2">Event & promotional flyers</p>
-                        <span class="card-cta text-brand-accent font-semibold text-sm">View Gallery &rarr;</span>
+                        <p class="text-slate-300 text-sm mb-2">Event and promotional flyers.</p>
+                        <span class="card-cta text-brand-accent font-semibold text-sm">Open Gallery &rarr;</span>
                     </div>
                 </div>
 
-                <!-- Product Ads -->
-                <div class="category-card" data-gallery="productads">
-                    <img src="images/category-icons/product-ads.png" alt="Product Ads 3D Icon" class="card-img"
-                        style="object-fit: cover;">
+                <div class="category-card lift" data-gallery="productads">
+                    <img src="images/category-icons/product-ads.png" alt="Product Ads 3D Icon" class="card-img" style="object-fit: cover;">
                     <div class="card-overlay">
                         <div class="flex items-center gap-3 mb-1">
-                            <i class="fas fa-ad text-green-400 text-2xl"></i>
+                            <i class="fas fa-ad text-emerald-400 text-2xl"></i>
                             <h3 class="text-xl font-bold text-white">Product Ads</h3>
                         </div>
-                        <p class="text-gray-300 text-sm mb-2">High-conversion ad creatives</p>
-                        <span class="card-cta text-brand-accent font-semibold text-sm">View Gallery &rarr;</span>
+                        <p class="text-slate-300 text-sm mb-2">High-conversion ad creatives.</p>
+                        <span class="card-cta text-brand-accent font-semibold text-sm">Open Gallery &rarr;</span>
                     </div>
                 </div>
 
-                <!-- Social Media Covers -->
-                <div class="category-card" data-gallery="covers">
-                    <img src="images/category-icons/social-covers.png" alt="Social Media Covers 3D Icon"
-                        class="card-img" style="object-fit: cover;">
+                <div class="category-card lift" data-gallery="covers">
+                    <img src="images/category-icons/social-covers.png" alt="Social Media Covers 3D Icon" class="card-img" style="object-fit: cover;">
                     <div class="card-overlay">
                         <div class="flex items-center gap-3 mb-1">
-                            <i class="fas fa-image text-purple-400 text-2xl"></i>
-                            <h3 class="text-xl font-bold text-white">Social Media Covers</h3>
+                            <i class="fas fa-image text-fuchsia-400 text-2xl"></i>
+                            <h3 class="text-xl font-bold text-white">Social Covers</h3>
                         </div>
-                        <p class="text-gray-300 text-sm mb-2">Facebook & social banners</p>
-                        <span class="card-cta text-brand-accent font-semibold text-sm">View Gallery &rarr;</span>
+                        <p class="text-slate-300 text-sm mb-2">Facebook and social banners.</p>
+                        <span class="card-cta text-brand-accent font-semibold text-sm">Open Gallery &rarr;</span>
                     </div>
                 </div>
 
-                <!-- Visiting Cards -->
-                <div class="category-card" data-gallery="visitingcards">
-                    <img src="images/category-icons/visiting-cards.png" alt="Visiting Cards 3D Icon" class="card-img"
-                        style="object-fit: cover;">
+                <div class="category-card lift" data-gallery="visitingcards">
+                    <img src="images/category-icons/visiting-cards.png" alt="Visiting Cards 3D Icon" class="card-img" style="object-fit: cover;">
                     <div class="card-overlay">
                         <div class="flex items-center gap-3 mb-1">
                             <i class="fas fa-id-card text-cyan-400 text-2xl"></i>
                             <h3 class="text-xl font-bold text-white">Visiting Cards</h3>
                         </div>
-                        <p class="text-gray-300 text-sm mb-2">Professional business cards</p>
-                        <span class="card-cta text-brand-accent font-semibold text-sm">View Gallery &rarr;</span>
+                        <p class="text-slate-300 text-sm mb-2">Professional business cards.</p>
+                        <span class="card-cta text-brand-accent font-semibold text-sm">Open Gallery &rarr;</span>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <!-- Reusable Gallery Modal -->
-        <div id="gallery-modal"
-            class="gallery-modal fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm">
-            <div class="modal-content relative bg-gray-900 rounded-2xl sm:rounded-2xl shadow-2xl flex flex-col"
-                style="width:92vw;max-width:1400px;height:90vh;">
-                <div class="flex items-center justify-between px-6 py-4 border-b border-gray-700/50">
-                    <h2 id="gallery-title" class="text-2xl font-bold text-white"></h2>
-                    <button id="close-gallery"
-                        class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-red-600 text-gray-300 hover:text-white text-xl transition">&times;</button>
+        <div id="gallery-modal" class="gallery-modal fixed inset-0 z-50 flex items-center justify-center bg-slate-950/88 backdrop-blur-xl">
+            <div class="modal-content relative bg-slate-950 rounded-3xl shadow-2xl flex flex-col border border-white/10" style="width:92vw;max-width:1400px;height:90vh;">
+                <div class="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-white/10">
+                    <h2 id="gallery-title" class="text-xl sm:text-2xl font-bold text-white"></h2>
+                    <button id="close-gallery" class="w-10 h-10 flex items-center justify-center rounded-full bg-white/6 hover:bg-red-600 text-slate-300 hover:text-white text-xl transition">&times;</button>
                 </div>
-                <div class="overflow-y-auto flex-1 p-6" id="gallery-scroll">
+                <div class="overflow-y-auto flex-1 p-4 sm:p-6" id="gallery-scroll">
                     <div class="masonry-grid" id="gallery-grid"></div>
-                    <div id="gallery-empty"
-                        class="hidden flex flex-col items-center justify-center py-20 text-gray-500">
+                    <div id="gallery-empty" class="hidden flex flex-col items-center justify-center py-20 text-slate-500">
                         <i class="fas fa-images text-5xl mb-4"></i>
                         <p class="text-xl">No images yet</p>
                         <p class="text-sm mt-2">Add images to this category folder to see them here.</p>
@@ -538,174 +958,165 @@
             </div>
         </div>
 
-        <!-- Lightbox for full-size image view -->
-        <div id="lightbox" class="lightbox fixed inset-0 z-[60] flex items-center justify-center bg-black/95">
-            <button id="lightbox-close"
-                class="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-gray-800/80 hover:bg-red-600 text-white text-2xl transition z-10">&times;</button>
-            <button id="lightbox-prev"
-                class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-gray-800/80 hover:bg-brand-DEFAULT text-white text-xl transition z-10"><i
-                    class="fas fa-chevron-left"></i></button>
-            <button id="lightbox-next"
-                class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-gray-800/80 hover:bg-brand-DEFAULT text-white text-xl transition z-10"><i
-                    class="fas fa-chevron-right"></i></button>
-            <img id="lightbox-img" src="" alt="Full size"
-                class="max-w-[90vw] max-h-[85vh] object-contain rounded-lg shadow-2xl">
+        <div id="lightbox" class="lightbox fixed inset-0 z-[60] flex items-center justify-center bg-black/96">
+            <button id="lightbox-close" class="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-red-600 text-white text-2xl transition z-10">&times;</button>
+            <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-brand-DEFAULT text-white text-xl transition z-10"><i class="fas fa-chevron-left"></i></button>
+            <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-brand-DEFAULT text-white text-xl transition z-10"><i class="fas fa-chevron-right"></i></button>
+            <img id="lightbox-img" src="" alt="Full size" class="max-w-[90vw] max-h-[85vh] object-contain rounded-2xl shadow-2xl">
         </div>
     </section>
 
-    <section class="py-12 sm:py-20 bg-gray-900">
-        <div class="container mx-auto px-4 sm:px-6">
-            <h2 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-10 text-center">My Journey</h2>
-            <div class="grid md:grid-cols-2 gap-8 sm:gap-10">
-                <div>
-                    <h3 class="text-2xl text-brand-accent mb-6"><i class="fas fa-graduation-cap mr-2"></i> Education
-                    </h3>
-                    <div class="border-l-4 border-gray-700 pl-6 mb-8 relative">
-                        <div class="absolute w-4 h-4 bg-brand-DEFAULT rounded-full -left-2.5 top-1"></div>
-                        <h4 class="text-xl font-bold">BS Computer Science</h4>
-                        <p class="text-gray-400">University of Chitral | 2021 - 2025</p>
-                        <p class="text-gray-500 text-sm mt-2">Passionate about Transforming Ideas into Visual
-                            Experiences.</p>
-                    </div>
-                    <div class="border-l-4 border-gray-700 pl-6 relative">
-                        <div class="absolute w-4 h-4 bg-gray-600 rounded-full -left-2.5 top-1"></div>
-                        <h4 class="text-xl font-bold">ICS</h4>
-                        <p class="text-gray-400">Govt. College Chitral | 2019 - 2021</p>
+    <section class="py-20 sm:py-28">
+        <div class="container mx-auto px-5 sm:px-6">
+            <div class="reveal text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+                <p class="section-eyebrow text-brand-accent text-xs sm:text-sm font-bold mb-3">Journey</p>
+                <h2 class="section-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">A timeline shaped by design, leadership, and momentum.</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
+                <div class="journey-card rounded-[1.75rem] p-7 sm:p-8 lift">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fas fa-graduation-cap text-brand-accent"></i> Education & Publications</h3>
+                    <div class="space-y-6">
+                        <!-- Education -->
+                        <div class="relative pl-6 border-l border-white/10">
+                            <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-amber-400 shadow-[0_0_24px_rgba(245,158,11,0.8)]"></div>
+                            <h4 class="text-lg font-bold text-white">BS Computer Science</h4>
+                                <p class="text-slate-400">University of Chitral | 2021 - 2025</p>
+                                <p class="text-slate-300 text-sm mt-2">A technical base that keeps the design process practical and efficient.</p>
+                        </div>
+                        <div class="relative pl-6 border-l border-white/10">
+                            <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-slate-500"></div>
+                            <h4 class="text-lg font-bold text-white">ICS</h4>
+                            <p class="text-slate-400">Govt. College Chitral | 2019 - 2021</p>
+                        </div>
+
+                        <!-- Publications -->
+                        <div class="border-t border-white/10 pt-6 mt-6">
+                            <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-book text-brand-accent"></i> Publications</h4>
+                            <div class="space-y-4">
+                                <div class="relative pl-6 border-l border-white/10">
+                                    <div class="absolute -left-[9px] top-1 w-3 h-3 rounded-full bg-brand-accent shadow-[0_0_12px_rgba(255,182,193,0.6)]"></div>
+                                    <p class="text-sm font-semibold text-white">OPTIMIZING ADABOOST FOR CROP YIELD FORECASTING: A PCA-BASED DIMENSIONALITY REDUCTION APPROACH</p>
+                                    <p class="text-xs text-slate-400 mt-1">JH Shah, S Bibi, M Roman, A Zaib, JA Mir, MA Uddin</p>
+                                    <p class="text-xs text-slate-400">Spectrum of Engineering Sciences 3 (12), 404-413 | 2025</p>
+                                </div>
+                                <div class="relative pl-6 border-l border-white/10">
+                                    <div class="absolute -left-[9px] top-1 w-3 h-3 rounded-full bg-brand-accent shadow-[0_0_12px_rgba(255,182,193,0.6)]"></div>
+                                    <p class="text-sm font-semibold text-white">A MACHINE LEARNING FRAMEWORK FOR STUDENT PERFORMANCE FORECASTING: BEST FIRST SEARCH WITH LOGISTIC REGRESSION AND DECISION TABLE IN EDUCATIONAL DATA MINING</p>
+                                    <p class="text-xs text-slate-400 mt-1">I Shahab, A Zaib, M Roman, JH Shah, AQ Khan</p>
+                                    <p class="text-xs text-slate-400">Spectrum of Engineering Sciences 3 (12), 346-354 | 2025</p>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-3 pt-3 border-t border-white/10">
+                                    <a href="https://scholar.google.com/citations?user=c0T2zNkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="text-brand-accent hover:text-cyan-300 transition">View all on Google Scholar →</a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div>
-                    <h3 class="text-2xl text-brand-accent mb-6"><i class="fas fa-briefcase mr-2"></i> Experience</h3>
-                    <div class="border-l-4 border-gray-700 pl-6 mb-8 relative">
-                        <div class="absolute w-4 h-4 bg-brand-DEFAULT rounded-full -left-2.5 top-1"></div>
-                        <h4 class="text-xl font-bold">Graphic Designer</h4>
-                        <p class="text-gray-400">HindukushSoft Technologies | Current</p>
-                        <p class="text-gray-500 text-sm mt-2">Designing communication materials and working with diverse
-                            teams.</p>
-                    </div>
-                    <div class="border-l-4 border-gray-700 pl-6 relative">
-                        <div class="absolute w-4 h-4 bg-gray-600 rounded-full -left-2.5 top-1"></div>
-                        <h4 class="text-xl font-bold">President - Youth Empowerment Club</h4>
-                        <p class="text-gray-400">2025 - 2026</p>
-                        <p class="text-gray-500 text-sm mt-2">Guided 200+ student volunteers in leadership activities.
-                        </p>
+                <div class="journey-card rounded-[1.75rem] p-7 sm:p-8 lift">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i class="fas fa-briefcase text-brand-accent"></i> Experience</h3>
+                    <div class="space-y-6">
+                        <div class="relative pl-6 border-l border-white/10">
+                            <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-amber-400 shadow-[0_0_24px_rgba(245,158,11,0.8)]"></div>
+                                <h4 class="text-lg font-bold text-white">Creative Designer</h4>
+                                <p class="text-slate-400"><a href="https://wefdallas.org/our-team/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-accent transition">WEF World Education Foundation</a> | Current</p>
+                                <p class="text-slate-300 text-sm mt-2">Creating educational and promotional visuals with strong brand consistency.</p>
+                            </div>
+                            <div class="relative pl-6 border-l border-white/10">
+                                <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-slate-500"></div>
+                                <h4 class="text-lg font-bold text-white">Hindukush Soft</h4>
+                                <p class="text-slate-400">Software Internship | 9 November - 17 June (6 months)</p>
+                                <p class="text-slate-300 text-sm mt-2">Contributed to UI assets and assisted on client deliverables.</p>
+                            </div>
+                            <div class="relative pl-6 border-l border-white/10">
+                                <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-slate-500"></div>
+                                <h4 class="text-lg font-bold text-white">NAVTTC Trainer</h4>
+                                <p class="text-slate-400">3-Month Course in Graphic Designing and Video Editing</p>
+                                <p class="text-slate-300 text-sm mt-2">Taught practical design workflow, layout basics, and video editing fundamentals.</p>
+                            </div>
+                        <div class="relative pl-6 border-l border-white/10">
+                            <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-slate-500"></div>
+                            <h4 class="text-lg font-bold text-white">President - Youth Empowerment Club</h4>
+                            <p class="text-slate-400">2025 - 2026</p>
+                                <p class="text-slate-300 text-sm mt-2">Guided 200+ student volunteers in leadership activities.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-12 sm:py-20 bg-gray-800 border-t border-gray-700">
-        <div class="container mx-auto px-4 sm:px-6 max-w-4xl">
-            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12">Let's Work Together</h2>
-            <div class="grid md:grid-cols-2 gap-8 sm:gap-10">
+    <section id="contact" class="py-20 sm:py-28">
+        <div class="container mx-auto px-5 sm:px-6 max-w-6xl">
+            <div class="reveal text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+                <p class="section-eyebrow text-brand-accent text-xs sm:text-sm font-bold mb-3">Contact</p>
+                <h2 class="section-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">If you want the next visual to feel unforgettable, let us build it.</h2>
+            </div>
+            <div class="grid lg:grid-cols-[0.85fr_1.15fr] gap-6 sm:gap-8 items-start">
                 <div class="space-y-4 sm:space-y-6">
-                    <div class="flex items-center space-x-3 sm:space-x-4">
-                        <div
-                            class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-700 rounded-full flex items-center justify-center text-brand-accent flex-shrink-0">
-                            <i class="fas fa-phone-alt text-sm sm:text-base"></i>
-                        </div>
-                        <div class="min-w-0">
-                            <p class="text-gray-400 text-xs sm:text-sm">Phone</p>
-                            <p class="text-base sm:text-xl font-semibold">+92 3400178565</p>
-                        </div>
+                    <div class="contact-card rounded-[1.75rem] p-6 sm:p-7 lift">
+                        <p class="text-xs uppercase tracking-[0.28em] text-slate-500 mb-1">Phone</p>
+                        <p class="text-xl sm:text-2xl font-bold text-white">+92 3400178565</p>
                     </div>
-                    <div class="flex items-center space-x-3 sm:space-x-4">
-                        <div
-                            class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-700 rounded-full flex items-center justify-center text-brand-accent flex-shrink-0">
-                            <i class="fas fa-envelope text-sm sm:text-base"></i>
-                        </div>
-                        <div class="min-w-0">
-                            <p class="text-gray-400 text-xs sm:text-sm">Email</p>
-                            <p class="text-sm sm:text-xl font-semibold break-all sm:break-normal">
-                                jawad.bscs2125@uoch.edu.pk</p>
-                        </div>
+                    <div class="contact-card rounded-[1.75rem] p-6 sm:p-7 lift">
+                        <p class="text-xs uppercase tracking-[0.28em] text-slate-500 mb-1">Email</p>
+                        <p class="text-lg sm:text-xl font-bold text-white break-all">jawad.bscs2125@uoch.edu.pk</p>
                     </div>
-                    <div class="flex items-center space-x-3 sm:space-x-4">
-                        <div
-                            class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-700 rounded-full flex items-center justify-center text-brand-accent flex-shrink-0">
-                            <i class="fas fa-map-marker-alt text-sm sm:text-base"></i>
-                        </div>
-                        <div class="min-w-0">
-                            <p class="text-gray-400 text-xs sm:text-sm">Location</p>
-                            <p class="text-base sm:text-xl font-semibold">Faizabad Hone, Chitral</p>
-                        </div>
+                    <div class="contact-card rounded-[1.75rem] p-6 sm:p-7 lift">
+                        <p class="text-xs uppercase tracking-[0.28em] text-slate-500 mb-1">Location</p>
+                        <p class="text-xl sm:text-2xl font-bold text-white">Faizabad Hone, Chitral</p>
                     </div>
                 </div>
 
-                <form action="mailto:jawad.bscs2125@uoch.edu.pk" method="post" enctype="text/plain"
-                    class="space-y-3 sm:space-y-4">
-                    <input type="text" placeholder="Your Name"
-                        class="w-full p-3 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:border-brand-DEFAULT text-sm sm:text-base">
-                    <input type="email" placeholder="Your Email"
-                        class="w-full p-3 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:border-brand-DEFAULT text-sm sm:text-base">
-                    <textarea rows="4" placeholder="Tell me about your project..."
-                        class="w-full p-3 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:border-brand-DEFAULT text-sm sm:text-base"></textarea>
-                    <button type="submit"
-                        class="w-full bg-brand-DEFAULT hover:bg-brand-dark text-white font-bold py-3 rounded transition shadow-lg text-sm sm:text-base">Send
-                        Message</button>
+                <form id="contact-form" class="contact-card rounded-[2rem] p-6 sm:p-8 space-y-4 sm:space-y-5">
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <input id="contact-name" type="text" placeholder="Your Name" class="w-full p-4 rounded-2xl bg-slate-950/50 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-brand-DEFAULT/70" required>
+                        <input id="contact-email" type="email" placeholder="Your Email" class="w-full p-4 rounded-2xl bg-slate-950/50 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-brand-DEFAULT/70">
+                    </div>
+                    <textarea id="contact-message" rows="5" placeholder="Tell me about your project..." class="w-full p-4 rounded-2xl bg-slate-950/50 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-brand-DEFAULT/70" required></textarea>
+                    <button type="submit" class="w-full py-4 rounded-2xl bg-white/5 border border-white/15 font-extrabold shadow-[0_18px_40px_rgba(6,182,212,0.12)]"><span class="gradient-text accent-glow">Send Message</span></button>
                 </form>
             </div>
         </div>
     </section>
 
-    <footer class="bg-gray-900 border-t border-gray-800 pt-12 pb-8 sm:pt-16 sm:pb-10 px-6 sm:px-12 relative z-10">
-        <!-- Back to Top Button -->
-        <a href="#home"
-            class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-gray-800 border-4 border-gray-900 rounded-full flex items-center justify-center text-brand-accent hover:bg-brand-DEFAULT hover:text-white transition shadow-[0_0_15px_rgba(0,0,0,0.5)]"
-            aria-label="Back to top">
-            <i class="fas fa-arrow-up"></i>
+    <footer class="border-t border-white/10 pt-12 pb-8 sm:pt-16 sm:pb-10 px-6 sm:px-12 relative z-10 bg-black/20">
+        <a href="#home" class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-slate-900 border border-white/10 rounded-full flex items-center justify-center text-brand-accent hover:bg-brand-DEFAULT hover:text-slate-950 transition shadow-[0_0_15px_rgba(0,0,0,0.5)]" aria-label="Back to top">
+            <img src="images/ICON.SVG" alt="Back to top" class="w-6 h-6">
         </a>
 
         <div class="container mx-auto max-w-6xl">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16 mb-12">
-                <!-- Brand & Tagline -->
                 <div class="text-center md:text-left">
-                    <a href="#" class="text-3xl font-bold text-white tracking-wider inline-block mb-4">J.Pixels</a>
-                    <p class="text-gray-400 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
-                        Bridging the gap between technical functionality and creative aesthetics. Elevating brands
-                        through precision design.
-                    </p>
+                    <img src="images/ICON.SVG" alt="J.Pixels" class="w-10 h-10 mb-3">
+                    <a href="#home" class="text-3xl font-bold text-white tracking-wider inline-block mb-4">J.Pixels</a>
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">Bridging technical clarity with creative impact. Making brands feel sharper, cleaner, and more alive.</p>
                 </div>
 
-                <!-- Quick Links -->
                 <div class="text-center md:text-left">
                     <h4 class="text-white font-semibold text-lg mb-4">Quick Links</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#about" class="text-gray-400 hover:text-brand-accent transition">About Me</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-brand-accent transition">Services</a>
-                        </li>
-                        <li><a href="#portfolio" class="text-gray-400 hover:text-brand-accent transition">Featured
-                                Work</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-brand-accent transition">Hire Me</a></li>
+                        <li><a href="#about" class="text-slate-400 hover:text-brand-accent transition">About Me</a></li>
+                        <li><a href="#services" class="text-slate-400 hover:text-brand-accent transition">Services</a></li>
+                        <li><a href="#portfolio" class="text-slate-400 hover:text-brand-accent transition">Featured Work</a></li>
+                        <li><a href="#contact" class="text-slate-400 hover:text-brand-accent transition">Hire Me</a></li>
                     </ul>
                 </div>
 
-                <!-- Let's Connect -->
                 <div class="text-center md:text-left">
-                    <h4 class="text-white font-semibold text-lg mb-4">Let's Connect</h4>
-                    <p class="text-gray-400 text-sm mb-4">Ready to start your next project? Let's create something
-                        amazing together.</p>
-                    <a href="mailto:jawad.bscs2125@uoch.edu.pk"
-                        class="inline-flex items-center gap-2 text-brand-accent hover:text-yellow-500 transition font-medium text-sm">
+                    <h4 class="text-white font-semibold text-lg mb-4">Let us connect</h4>
+                    <p class="text-slate-300 text-sm mb-4">Ready to build something that stands out instead of blending in?</p>
+                    <a href="mailto:jawad.bscs2125@uoch.edu.pk" class="inline-flex items-center gap-2 text-brand-accent hover:text-amber-400 transition font-medium text-sm">
                         <i class="fas fa-envelope"></i> Email Me
                     </a>
                 </div>
             </div>
 
-            <!-- Bottom Bar -->
-            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-gray-500 text-xs sm:text-sm">&copy; 2026 J.Pixels. All rights reserved.</p>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-slate-500 text-xs sm:text-sm">&copy; 2026 J.Pixels. All rights reserved.</p>
                 <div class="flex items-center space-x-5">
-                    <a href="https://web.facebook.com/Jawad.Hussai9.JD"
-                        class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-DEFAULT hover:text-white transition transform hover:-translate-y-1 shadow-lg"><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/jawad.00jd/"
-                        class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-pink-500 hover:to-purple-600 hover:text-white transition transform hover:-translate-y-1 shadow-lg"><i
-                            class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/jawad-hussain-ctl"
-                        class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-[#0077b5] hover:text-white transition transform hover:-translate-y-1 shadow-lg"><i
-                            class="fab fa-linkedin-in"></i></a>
+                    <a href="https://web.facebook.com/Jawad.Hussai9.JD" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-brand-DEFAULT hover:text-slate-950 transition transform hover:-translate-y-1 shadow-lg"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/jawad.00jd/" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-pink-500 hover:to-purple-600 hover:text-white transition transform hover:-translate-y-1 shadow-lg"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/jawad-hussain-ctl" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-[#0077b5] hover:text-white transition transform hover:-translate-y-1 shadow-lg"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
@@ -716,23 +1127,32 @@
         const btn = document.getElementById('menu-btn');
         const nav = document.getElementById('mobile-menu');
 
-        btn.addEventListener('click', () => {
-            nav.classList.toggle('hidden');
-            // Toggle hamburger icon to X
-            const icon = btn.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
-
-        // Auto-close mobile menu on link click
-        nav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.add('hidden');
+        if (btn) {
+            btn.addEventListener('click', () => {
+                if (!nav) return;
+                nav.classList.toggle('hidden');
+                // Toggle hamburger icon to X
                 const icon = btn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+                if (icon) {
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                }
             });
-        });
+
+            // Auto-close mobile menu on link click
+            if (nav) {
+                nav.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        nav.classList.add('hidden');
+                        const icon = btn.querySelector('i');
+                        if (icon) {
+                            icon.classList.remove('fa-times');
+                            icon.classList.add('fa-bars');
+                        }
+                    });
+                });
+            }
+        }
 
         // ===== Gallery Data =====
         const galleryData = {
@@ -859,19 +1279,27 @@
                 data.images.forEach((src, index) => {
                     const item = document.createElement('div');
                     item.className = 'masonry-item';
-                    item.innerHTML = `<img src="${src}" alt="${data.title} ${index + 1}" loading="lazy">`;
+                    const webpSrc = src.replace(/\.[^/.]+$/, '.webp');
+                    // Prefer WebP when available, fall back to original image on error
+                    item.innerHTML = `<img src="${webpSrc}" alt="${data.title} ${index + 1}" loading="lazy" onerror="this.onerror=null;this.src='${src}';">`;
                     item.addEventListener('click', () => openLightbox(index));
                     galleryGrid.appendChild(item);
                 });
             }
 
             document.getElementById('gallery-scroll').scrollTop = 0;
-            galleryModal.classList.add('active');
+            if (galleryModal) {
+                galleryModal.classList.add('active');
+                galleryModal.setAttribute('aria-hidden', 'false');
+            }
             document.body.style.overflow = 'hidden';
         }
 
         function closeGallery() {
-            galleryModal.classList.remove('active');
+            if (galleryModal) {
+                galleryModal.classList.remove('active');
+                galleryModal.setAttribute('aria-hidden', 'true');
+            }
             document.body.style.overflow = '';
         }
 
@@ -882,10 +1310,12 @@
             });
         });
 
-        closeGalleryBtn.addEventListener('click', closeGallery);
-        galleryModal.addEventListener('click', (e) => {
-            if (e.target === galleryModal) closeGallery();
-        });
+        if (closeGalleryBtn) closeGalleryBtn.addEventListener('click', closeGallery);
+        if (galleryModal) {
+            galleryModal.addEventListener('click', (e) => {
+                if (e.target === galleryModal) closeGallery();
+            });
+        }
 
         // ===== Lightbox =====
         const lightbox = document.getElementById('lightbox');
@@ -896,30 +1326,41 @@
         let currentLightboxIndex = 0;
 
         function openLightbox(index) {
+            if (!currentGalleryImages.length) return;
             currentLightboxIndex = index;
-            lightboxImg.src = currentGalleryImages[index];
-            lightbox.classList.add('active');
+            if (lightboxImg) lightboxImg.src = currentGalleryImages[index];
+            if (lightbox) {
+                lightbox.classList.add('active');
+                lightbox.setAttribute('aria-hidden', 'false');
+            }
         }
 
         function closeLightbox() {
-            lightbox.classList.remove('active');
+            if (lightbox) {
+                lightbox.classList.remove('active');
+                lightbox.setAttribute('aria-hidden', 'true');
+            }
         }
 
-        lightboxClose.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
-        });
+        if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+        if (lightbox) {
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+        }
 
-        lightboxPrev.addEventListener('click', (e) => {
+        if (lightboxPrev) lightboxPrev.addEventListener('click', (e) => {
             e.stopPropagation();
+            if (!currentGalleryImages.length) return;
             currentLightboxIndex = (currentLightboxIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
-            lightboxImg.src = currentGalleryImages[currentLightboxIndex];
+            if (lightboxImg) lightboxImg.src = currentGalleryImages[currentLightboxIndex];
         });
 
-        lightboxNext.addEventListener('click', (e) => {
+        if (lightboxNext) lightboxNext.addEventListener('click', (e) => {
             e.stopPropagation();
+            if (!currentGalleryImages.length) return;
             currentLightboxIndex = (currentLightboxIndex + 1) % currentGalleryImages.length;
-            lightboxImg.src = currentGalleryImages[currentLightboxIndex];
+            if (lightboxImg) lightboxImg.src = currentGalleryImages[currentLightboxIndex];
         });
 
         // ===== Keyboard Shortcuts =====
@@ -939,7 +1380,7 @@
 
         // ===== Tech Lines Animation =====
         const canvas = document.getElementById('tech-canvas');
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas ? canvas.getContext('2d') : null;
         let particlesArray = [];
         let mouse = { x: null, y: null };
 
@@ -953,6 +1394,7 @@
         });
 
         function resizeCanvas() {
+            if (!canvas || !ctx) return;
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             initParticles();
@@ -997,7 +1439,8 @@
                 if (this.y > canvas.height) this.y = 0;
             }
             draw() {
-                ctx.fillStyle = 'rgba(59, 130, 246, 0.4)'; // Subdued brand blue
+                if (!ctx) return;
+                ctx.fillStyle = 'rgba(34, 211, 238, 0.42)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -1005,6 +1448,7 @@
         }
 
         function initParticles() {
+            if (!canvas || !ctx) return;
             particlesArray = [];
             // Lower density for elegance
             let numParticles = Math.min(Math.floor((window.innerWidth * window.innerHeight) / 18000), 100);
@@ -1014,6 +1458,7 @@
         }
 
         function connect() {
+            if (!ctx) return;
             for (let a = 0; a < particlesArray.length; a++) {
                 for (let b = a + 1; b < particlesArray.length; b++) {
                     let dx = particlesArray[a].x - particlesArray[b].x;
@@ -1023,7 +1468,7 @@
                     // Clean, long connection lines with low opacity
                     if (distance < 20000) {
                         let opacityValue = 1 - (distance / 20000);
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${opacityValue * 0.2})`; // Very faint lines
+                        ctx.strokeStyle = `rgba(245, 158, 11, ${opacityValue * 0.14})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -1035,6 +1480,7 @@
         }
 
         function animateParticles() {
+            if (!ctx) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let i = 0; i < particlesArray.length; i++) {
                 particlesArray[i].update();
@@ -1044,8 +1490,223 @@
             requestAnimationFrame(animateParticles);
         }
 
-        resizeCanvas();
-        animateParticles();
+        if (canvas && ctx) {
+            resizeCanvas();
+            animateParticles();
+        }
+
+        // ===== Pixel Art Portfolio Component =====
+        const PALETTES = {
+            cyberpunk: ['#0a0e27', '#16213e', '#ff006e', '#00d9ff', '#ffbe0b'],
+            forest: ['#1b3d2c', '#2d5a3d', '#4a9d6f', '#7bc94f', '#c8f7dc'],
+            sunset: ['#2a1a42', '#8b3a62', '#ff6b6b', '#ffa500', '#ffe66d'],
+            retro: ['#2c2137', '#764462', '#d72638', '#ff9500', '#ffd60a'],
+            ocean: ['#0b3d91', '#1d5a96', '#2b9fd9', '#5dd9c1', '#a8dadc'],
+        };
+
+        const PATTERNS = {
+            profile: [
+                [0, 0, 1, 1, 1, 1, 0, 0],
+                [0, 1, 1, 2, 2, 1, 1, 0],
+                [1, 1, 2, 2, 2, 2, 1, 1],
+                [1, 2, 2, 3, 3, 2, 2, 1],
+                [1, 2, 2, 3, 3, 2, 2, 1],
+                [1, 1, 2, 2, 2, 2, 1, 1],
+                [0, 1, 1, 4, 4, 1, 1, 0],
+                [0, 0, 1, 1, 1, 1, 0, 0],
+            ],
+            circuit: [
+                [1, 0, 0, 0, 0, 0, 0, 1],
+                [1, 0, 2, 2, 2, 2, 0, 1],
+                [1, 0, 2, 3, 3, 2, 0, 1],
+                [0, 0, 2, 3, 3, 2, 0, 0],
+                [0, 0, 2, 3, 3, 2, 0, 0],
+                [1, 0, 2, 2, 2, 2, 0, 1],
+                [1, 0, 0, 0, 0, 0, 0, 1],
+                [1, 1, 0, 0, 0, 0, 1, 1],
+            ],
+        };
+
+        function scalePattern(pattern, targetSize) {
+            const sourceHeight = pattern.length;
+            const sourceWidth = pattern[0]?.length || sourceHeight;
+            const scaled = Array(targetSize).fill(null).map(() => Array(targetSize).fill(0));
+
+            for (let y = 0; y < targetSize; y++) {
+                for (let x = 0; x < targetSize; x++) {
+                    const sourceX = Math.floor((x / targetSize) * sourceWidth);
+                    const sourceY = Math.floor((y / targetSize) * sourceHeight);
+                    scaled[y][x] = pattern[sourceY]?.[sourceX] ?? 0;
+                }
+            }
+            return scaled;
+        }
+
+        function initPixelArt() {
+            const gridElement = document.getElementById('pixel-grid');
+            const wrapperElement = document.getElementById('pixel-wrapper');
+            const containerElement = document.getElementById('pixel-art-container');
+            const hintElement = document.getElementById('pixel-hint');
+            
+            if (!gridElement || !wrapperElement || !containerElement) return;
+
+            const gridSize = 8;
+            const palette = 'cyberpunk';
+            const pattern = 'profile';
+            const selectedPattern = PATTERNS[pattern] || PATTERNS.profile;
+            const selectedPalette = PALETTES[palette] || PALETTES.cyberpunk;
+            const scaledPattern = scalePattern(selectedPattern, gridSize);
+
+            let isHovering = false;
+            const imageUrl = 'images/ME/JD.jpeg';
+
+            gridElement.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+            gridElement.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
+
+            // Load image and extract pixel data
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                // Create canvas for image processing
+                const canvas = document.createElement('canvas');
+                canvas.width = gridSize;
+                canvas.height = gridSize;
+                const ctx = canvas.getContext('2d');
+                
+                // Draw resized image to small canvas
+                ctx.drawImage(img, 0, 0, gridSize, gridSize);
+                const imageData = ctx.getImageData(0, 0, gridSize, gridSize).data;
+
+                // Create pixels with image data
+                scaledPattern.forEach((row, rowIdx) => {
+                    row.forEach((colorIndex, colIdx) => {
+                        const pixel = document.createElement('div');
+                        pixel.className = 'pixel';
+                        pixel.style.position = 'relative';
+                        pixel.style.overflow = 'hidden';
+                        
+                        const actualColorIndex = Math.min(colorIndex, selectedPalette.length - 1);
+                        const color = selectedPalette[actualColorIndex];
+
+                        pixel.dataset.color = color;
+                        pixel.dataset.colorIndex = actualColorIndex;
+                        pixel.dataset.row = rowIdx;
+                        pixel.dataset.col = colIdx;
+
+                        // Store image data for this pixel
+                        const pixelIndex = (rowIdx * gridSize + colIdx) * 4;
+                        const r = imageData[pixelIndex];
+                        const g = imageData[pixelIndex + 1];
+                        const b = imageData[pixelIndex + 2];
+                        const a = imageData[pixelIndex + 3];
+                        pixel.dataset.imageColor = `rgba(${r}, ${g}, ${b}, ${a / 255})`;
+
+                        // Initially show dark background
+                        pixel.style.backgroundColor = '#1a1a1a';
+                        pixel.style.boxShadow = `inset 0 0 2px rgba(0, 0, 0, 0.5)`;
+
+                        gridElement.appendChild(pixel);
+                    });
+                });
+
+                // Hover handlers - reveal image one by one
+                containerElement.addEventListener('mouseenter', () => {
+                    isHovering = true;
+                    wrapperElement.classList.add('hovering');
+                    hintElement.classList.add('hidden');
+
+                    const pixels = gridElement.querySelectorAll('.pixel');
+                    pixels.forEach((pixel, index) => {
+                        const staggerDelay = (index * 30) / 1000;
+                        pixel.classList.add('revealed');
+                        pixel.style.setProperty('--stagger-delay', `${staggerDelay}s`);
+                        pixel.style.animationDelay = `${staggerDelay}s`;
+                        
+                        // Reveal image portion with stagger
+                        setTimeout(() => {
+                            const colIdx = parseInt(pixel.dataset.col);
+                            const rowIdx = parseInt(pixel.dataset.row);
+                            const bgX = (colIdx / gridSize) * 100;
+                            const bgY = (rowIdx / gridSize) * 100;
+                            
+                            pixel.style.backgroundImage = `url('${imageUrl}')`;
+                            pixel.style.backgroundSize = `${gridSize * 100}% ${gridSize * 100}%`;
+                            pixel.style.backgroundPosition = `${bgX}% ${bgY}%`;
+                            pixel.style.backgroundColor = pixel.dataset.imageColor;
+                            
+                            // Add colored overlay
+                            const overlay = document.createElement('div');
+                            overlay.style.position = 'absolute';
+                            overlay.style.inset = '0';
+                            overlay.style.backgroundColor = pixel.dataset.color;
+                            overlay.style.opacity = '0.3';
+                            overlay.style.pointerEvents = 'none';
+                            pixel.appendChild(overlay);
+                            
+                            // Enhance glow on hover
+                            pixel.style.boxShadow = `0 0 12px ${pixel.dataset.color}, inset 0 0 2px rgba(0, 0, 0, 0.5)`;
+                        }, staggerDelay * 1000);
+                    });
+                });
+
+                containerElement.addEventListener('mouseleave', () => {
+                    isHovering = false;
+                    wrapperElement.classList.remove('hovering');
+                    hintElement.classList.remove('hidden');
+
+                    const pixels = gridElement.querySelectorAll('.pixel');
+                    pixels.forEach((pixel) => {
+                        pixel.classList.remove('revealed');
+                        pixel.style.backgroundColor = '#1a1a1a';
+                        pixel.style.backgroundImage = 'none';
+                        pixel.style.boxShadow = 'inset 0 0 2px rgba(0, 0, 0, 0.5)';
+                        
+                        // Remove overlay
+                        const overlay = pixel.querySelector('div');
+                        if (overlay) overlay.remove();
+                    });
+                });
+            };
+            
+            img.src = imageUrl;
+        }
+
+        // Initialize pixel art when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initPixelArt);
+        } else {
+            initPixelArt();
+        }
+
+        // ===== WhatsApp Form Handler =====
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('contact-name')?.value || 'Anonymous';
+                const email = document.getElementById('contact-email')?.value || '';
+                const message = document.getElementById('contact-message')?.value || '';
+                const whatsappMessage = `Name: ${name}%0AEmail: ${email}%0AMessage: ${message}`;
+                const whatsappUrl = `https://wa.me/923400178565?text=${whatsappMessage}`;
+                window.open(whatsappUrl, '_blank');
+            });
+        }
+
+        const revealElements = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            revealElements.forEach((element) => revealObserver.observe(element));
+        } else {
+            revealElements.forEach((element) => element.classList.add('is-visible'));
+        }
     </script>
 </body>
 
