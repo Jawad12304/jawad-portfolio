@@ -1,0 +1,87 @@
+# =============================================================================
+# Apache configuration for Namecheap shared hosting (cPanel / LiteSpeed).
+#
+# This file is INERT on GitHub Pages — GitHub serves static files through its
+# own CDN and ignores .htaccess entirely. It exists so the site behaves
+# correctly the day it is uploaded to public_html, with no other changes.
+#
+# Every directive below is wrapped in <IfModule>, so a host missing one of
+# these modules will skip that block instead of returning a 500.
+# =============================================================================
+
+# --- Default document -------------------------------------------------------
+DirectoryIndex index.html
+
+# --- Force HTTPS ------------------------------------------------------------
+# Prevents mixed-content warnings: the page and every asset load over the same
+# scheme. Uses relative paths, so it works in any subdirectory.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# --- Correct MIME types -----------------------------------------------------
+# Some shared hosts still ship an Apache config predating these formats and
+# serve them as application/octet-stream, which browsers refuse to render.
+<IfModule mod_mime.c>
+    AddType image/webp                  .webp
+    AddType image/avif                  .avif
+    AddType image/svg+xml               .svg
+    AddType image/x-icon                .ico
+    AddType application/manifest+json   .webmanifest
+    AddType text/css                    .css
+    AddType application/javascript      .js
+    AddType font/woff2                  .woff2
+</IfModule>
+
+# --- Compression ------------------------------------------------------------
+# Images (webp/jpg/png) are already compressed; re-compressing wastes CPU.
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+    AddOutputFilterByType DEFLATE application/javascript application/json
+    AddOutputFilterByType DEFLATE application/xml application/manifest+json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# --- Caching ----------------------------------------------------------------
+# HTML stays short so content edits go live promptly. Fingerprint-free assets
+# get a moderate TTL rather than a year, since their filenames do not change.
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/html                     "access plus 10 minutes"
+    ExpiresByType text/css                      "access plus 7 days"
+    ExpiresByType application/javascript        "access plus 7 days"
+    ExpiresByType image/webp                    "access plus 30 days"
+    ExpiresByType image/jpeg                    "access plus 30 days"
+    ExpiresByType image/png                     "access plus 30 days"
+    ExpiresByType image/svg+xml                 "access plus 30 days"
+    ExpiresByType font/woff2                    "access plus 90 days"
+    # Deliberately short: a stale favicon is very hard for a visitor to clear.
+    ExpiresByType image/x-icon                  "access plus 2 days"
+    ExpiresByType application/manifest+json     "access plus 2 days"
+</IfModule>
+
+# --- Security headers -------------------------------------------------------
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# --- Keep working files out of the public site ------------------------------
+<FilesMatch "\.(md|py|ps1|json|config\.js)$">
+    Require all denied
+</FilesMatch>
+# ...but the manifest and gallery data must stay reachable.
+<FilesMatch "^(site\.webmanifest|gallery-data\.js)$">
+    Require all granted
+</FilesMatch>
+
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>
+
+ErrorDocument 404 /404.html

@@ -1,0 +1,14 @@
+{
+  "name": "jawad-portfolio",
+  "private": true,
+  "description": "J.Pixels — portfolio of Jawad Hussain, graphic designer.",
+  "scripts": {
+    "css": "tailwindcss -c tailwind.config.js -i assets/css/tailwind-input.css -o assets/css/tailwind.css --minify",
+    "css:watch": "tailwindcss -c tailwind.config.js -i assets/css/tailwind-input.css -o assets/css/tailwind.css --watch",
+    "images": "python scripts/build_assets.py",
+    "favicons": "python scripts/build_favicons.py"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

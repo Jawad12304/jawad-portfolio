@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Build tooling and print-resolution masters are not useful in search results.
+Disallow: /scripts/
+Disallow: /files/
+
+Sitemap: https://jawadjd.me/sitemap.xml
